@@ -234,19 +234,11 @@ img {
 .hero-title {
     font-size: var(--text-hero);
     line-height: 0.85;
+    letter-spacing: -0.04em;
     font-weight: 700;
     text-transform: uppercase;
     margin-bottom: 2rem;
     color: var(--black);
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-.title-line {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
 }
 
 .hero-desc {
