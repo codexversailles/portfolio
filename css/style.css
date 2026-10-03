@@ -286,8 +286,8 @@ img {
 /* Skills Section */
 .skills-wrapper {
     grid-column: 1 / 13;
-    display: grid;
-    grid-template-columns: auto 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 4rem;
     margin-top: 1rem;
 }
