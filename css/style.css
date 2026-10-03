@@ -36,6 +36,12 @@ html {
 
 body {
     background-color: var(--white);
+    background-image: 
+        linear-gradient(rgba(17, 17, 17, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(17, 17, 17, 0.04) 1px, transparent 1px);
+    background-size: var(--grid-gap) var(--grid-gap);
+    background-position: center top;
+    background-attachment: fixed;
     color: var(--black);
     font-family: var(--font-family);
     line-height: 1.4;
