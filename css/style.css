@@ -445,19 +445,21 @@ img {
 }
 
 .timeline-role {
-    grid-column: 3 / 6;
+    grid-column: 3 / 7;
     font-weight: 700;
     font-size: var(--text-h3);
+    padding-right: 1rem;
 }
 
 .timeline-org {
-    grid-column: 6 / 9;
+    grid-column: 7 / 10;
     color: var(--gray);
     font-size: var(--text-body);
+    padding-right: 1rem;
 }
 
 .timeline-desc {
-    grid-column: 9 / 13;
+    grid-column: 10 / 13;
 }
 
 /* 10. Achievements Section */
