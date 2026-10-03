@@ -287,9 +287,9 @@ img {
 .skills-wrapper {
     grid-column: 1 / 13;
     display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 2rem;
-    margin-top: 1rem;
+    grid-template-columns: 7fr 5fr;
+    gap: 4rem;
+    margin-top: 2rem;
 }
 
 .skills-grid {
@@ -318,39 +318,39 @@ img {
     display: flex;
     flex-direction: column;
 }
+
 .skill-title {
     font-size: var(--text-h3);
     font-weight: 700;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     padding-bottom: 0.5rem;
     text-transform: uppercase;
     letter-spacing: -0.02em;
+    color: var(--black);
 }
+
 .skill-list {
     list-style: none;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(6, max-content);
-    justify-content: start;
-    gap: 0.5rem;
-}
-
-.skill-category:nth-child(2) .skill-list {
-    grid-template-columns: repeat(3, max-content);
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 3rem;
+    row-gap: 0;
 }
 
 .skill-list li {
-    padding: 0.4rem 0.75rem;
-    border: 1px solid var(--black);
     font-size: 0.9rem;
     text-transform: uppercase;
     font-weight: 500;
-    transition: transform 0.3s ease;
-    background-color: transparent;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--light-gray);
+    color: var(--gray);
+    transition: color 0.3s ease, border-color 0.3s ease;
 }
 
 .skill-list li:hover {
-    transform: scale(1.05);
+    color: var(--black);
+    border-bottom-color: var(--black);
 }
 /* 7. Selected Work Section */
 .project-list {

@@ -45,10 +45,9 @@
         grid-column: 1 / -1;
         grid-template-columns: 1fr;
     }
-    
     .skill-list {
-        display: flex;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
     }
 
     /* Projects */
@@ -186,6 +185,9 @@
     /* Skills */
     .skills-wrapper {
         gap: 2rem;
+    }
+    .skill-list {
+        grid-template-columns: 1fr;
     }
 
     /* Creative Gallery */
