@@ -285,7 +285,7 @@ img {
 
 /* Skills Section */
 .skills-grid {
-    grid-column: 2 / 13;
+    grid-column: 1 / 13;
     display: flex;
     flex-direction: column;
     gap: 3rem;
