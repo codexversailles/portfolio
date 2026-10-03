@@ -299,7 +299,6 @@ img {
     font-size: var(--text-h3);
     font-weight: 700;
     margin-bottom: 1rem;
-    border-bottom: 1px solid var(--black);
     padding-bottom: 0.5rem;
     text-transform: uppercase;
     letter-spacing: -0.02em;
@@ -319,6 +318,37 @@ img {
     font-size: 1rem;
     text-transform: uppercase;
     font-weight: 500;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    background-color: transparent;
+    z-index: 1;
+}
+
+.skill-list li:hover {
+    transform: scale(1.05);
+}
+
+.skill-list li::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    background-image: var(--icon-url);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.skill-list li:hover::before {
+    opacity: 0.15;
 }
 /* 7. Selected Work Section */
 .project-list {
