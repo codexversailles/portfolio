@@ -182,6 +182,10 @@
         grid-template-columns: 1fr;
         gap: 2rem;
     }
+    
+    .skill-list {
+        column-count: 1;
+    }
 
     /* Creative Gallery */
     .creative-gallery {
