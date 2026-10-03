@@ -307,12 +307,17 @@ img {
 .skill-list {
     list-style: none;
     padding: 0;
-    column-count: 1;
-    font-size: var(--text-body);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
 .skill-list li {
-    margin-bottom: 0.5rem;
+    padding: 0.4rem 1rem;
+    border: 1px solid var(--black);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    font-weight: 500;
 }
 /* 7. Selected Work Section */
 .project-list {
