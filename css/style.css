@@ -287,8 +287,8 @@ img {
 .skills-wrapper {
     grid-column: 1 / 13;
     display: grid;
-    grid-template-columns: 3fr 1fr;
-    gap: var(--grid-gap);
+    grid-template-columns: auto 1fr;
+    gap: 4rem;
     margin-top: 1rem;
 }
 
