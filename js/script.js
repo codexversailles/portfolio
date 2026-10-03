@@ -108,4 +108,24 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // 6. Scroll Animations
+    const fadeElements = document.querySelectorAll('.fade-up');
+    
+    if (fadeElements.length > 0) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Optional: run only once
+                }
+            });
+        }, {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        });
+
+        fadeElements.forEach(el => observer.observe(el));
+    }
 });
