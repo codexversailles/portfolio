@@ -285,10 +285,10 @@ img {
 
 /* Skills Section */
 .skills-grid {
-    grid-column: 4 / 13;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--grid-gap);
+    grid-column: 2 / 13;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
     margin-top: 1rem;
 }
 .skill-category {
@@ -307,14 +307,12 @@ img {
 .skill-list {
     list-style: none;
     padding: 0;
-    column-count: 2;
-    column-gap: 2rem;
+    column-count: 1;
     font-size: var(--text-body);
 }
 
 .skill-list li {
     margin-bottom: 0.5rem;
-    break-inside: avoid;
 }
 /* 7. Selected Work Section */
 .project-list {
