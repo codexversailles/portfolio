@@ -19,7 +19,7 @@
     --text-body: 1rem;    /* 16px */
     --text-h3: 1.5rem;    /* 24px */
     --text-h2: 4vw;       /* Large statement */
-    --text-hero: 10vw;    /* Huge name */
+    --text-hero: 8vw;     /* Huge name */
 }
 
 /* Base Reset */
