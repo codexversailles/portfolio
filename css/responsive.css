@@ -44,6 +44,11 @@
     .skills-grid {
         grid-column: 1 / -1;
     }
+    
+    .skill-list {
+        display: flex;
+        flex-wrap: wrap;
+    }
 
     /* Projects */
     .project-layout-a .project-content,
@@ -238,5 +243,6 @@
         text-align: left;
     }
 }
+
 
 
