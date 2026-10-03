@@ -24,6 +24,7 @@
         grid-column: 1 / -1;
         grid-row: 3;
         margin-top: -2rem; /* Slight overlap on mobile */
+        width: 100%;
     }
     .hero-desc {
         grid-column: 1 / 5;

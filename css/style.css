@@ -209,7 +209,7 @@ img {
 }
 
 .hero-image {
-    grid-column: 7 / 13;
+    grid-column: 5 / 13;
     grid-row: 2;
     z-index: 1;
     opacity: 0.95;
@@ -230,13 +230,21 @@ img {
     position: relative;
     font-size: var(--text-hero);
     line-height: 0.85;
-    letter-spacing: -0.04em;
     font-weight: 700;
     text-transform: uppercase;
     margin-bottom: 2rem;
     color: var(--black);
     mix-blend-mode: difference; /* Creates a cool overlap effect */
     color: var(--white); /* So it inverts to black on white background */
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+}
+
+.title-line {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .hero-desc {
