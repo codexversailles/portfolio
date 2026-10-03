@@ -283,6 +283,35 @@ img {
     color: var(--gray);
 }
 
+/* Skills Section */
+.skills-grid {
+    grid-column: 4 / 13;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--grid-gap);
+    margin-top: 1rem;
+}
+.skill-category {
+    display: flex;
+    flex-direction: column;
+}
+.skill-title {
+    font-size: var(--text-h3);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--black);
+    padding-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+}
+.skill-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: var(--text-body);
+}
 /* 7. Selected Work Section */
 .project-list {
     grid-column: 1 / -1;
@@ -646,3 +675,4 @@ img {
         scroll-behavior: auto !important;
     }
 }
+

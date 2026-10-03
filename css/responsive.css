@@ -40,6 +40,11 @@
         grid-column: 1 / -1;
     }
 
+    /* Skills */
+    .skills-grid {
+        grid-column: 1 / -1;
+    }
+
     /* Projects */
     .project-layout-a .project-content,
     .project-layout-a .project-visual,
@@ -172,6 +177,12 @@
         text-align: left;
     }
 
+    /* Skills */
+    .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
     /* Creative Gallery */
     .creative-gallery {
         grid-template-columns: repeat(4, 1fr);
@@ -227,3 +238,4 @@
         text-align: left;
     }
 }
+
