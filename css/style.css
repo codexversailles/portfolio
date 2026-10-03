@@ -286,21 +286,22 @@ img {
 /* Skills Section */
 .skills-wrapper {
     grid-column: 1 / 13;
-    display: grid;
-    grid-template-columns: 7fr 5fr;
+    display: flex;
+    flex-direction: column;
     gap: 4rem;
     margin-top: 2rem;
 }
 
 .skills-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
 }
 
 .github-contributions {
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .gh-chart-container {
@@ -333,9 +334,16 @@ img {
     list-style: none;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
     column-gap: 3rem;
     row-gap: 0;
+}
+
+.skill-category:nth-child(1) .skill-list {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.skill-category:nth-child(2) .skill-list {
+    grid-template-columns: 1fr;
 }
 
 .skill-list li {

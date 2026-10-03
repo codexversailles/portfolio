@@ -43,6 +43,8 @@
     /* Skills */
     .skills-wrapper {
         grid-column: 1 / -1;
+    }
+    .skills-grid {
         grid-template-columns: 1fr;
     }
     .skill-list {
@@ -186,7 +188,8 @@
     .skills-wrapper {
         gap: 2rem;
     }
-    .skill-list {
+    .skill-category:nth-child(1) .skill-list,
+    .skill-category:nth-child(2) .skill-list {
         grid-template-columns: 1fr;
     }
 
@@ -245,6 +248,7 @@
         text-align: left;
     }
 }
+
 
 
 
