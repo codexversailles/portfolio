@@ -308,7 +308,7 @@ img {
     list-style: none;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, 180px);
+    grid-template-columns: repeat(auto-fill, 240px);
     justify-content: start;
     gap: 0.5rem;
 }
