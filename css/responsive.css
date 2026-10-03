@@ -15,21 +15,26 @@
     }
 
     /* Hero */
+    .hero-image {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        margin-top: 0;
+    }
     .hero-title {
         grid-column: 1 / -1;
-        margin-top: 2rem;
+        grid-row: 3;
+        margin-top: -2rem; /* Slight overlap on mobile */
     }
     .hero-desc {
         grid-column: 1 / 5;
+        grid-row: 4;
     }
     .hero-year {
         grid-column: 5 / 7;
+        grid-row: 4;
     }
 
     /* About */
-    .about-image {
-        grid-column: 1 / -1;
-    }
     .about-statement {
         grid-column: 1 / -1;
         margin-bottom: 2rem;
