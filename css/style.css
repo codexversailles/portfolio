@@ -4,7 +4,7 @@
 :root {
     --black: #111111;
     --white: #f5f5f2;
-    --red: #e31b23;
+    --green: #00A651;
     --gray: #777777;
     --light-gray: #dddddd;
 
@@ -55,7 +55,7 @@ a {
 }
 
 a:hover {
-    color: var(--red);
+    color: var(--green);
 }
 
 img {
@@ -90,9 +90,9 @@ img {
 }
 
 .grid-col {
-    background-color: rgba(227, 27, 35, 0.05); /* Subtle red tint */
-    border-left: 1px solid rgba(227, 27, 35, 0.1);
-    border-right: 1px solid rgba(227, 27, 35, 0.1);
+    background-color: rgba(0, 166, 81, 0.05); /* Subtle green tint */
+    border-left: 1px solid rgba(0, 166, 81, 0.1);
+    border-right: 1px solid rgba(0, 166, 81, 0.1);
 }
 
 .hidden {
@@ -128,9 +128,9 @@ img {
 }
 
 .btn:hover {
-    background: var(--red);
+    background: var(--green);
     color: var(--white);
-    border-color: var(--red);
+    border-color: var(--green);
 }
 
 .image-placeholder {
@@ -178,7 +178,7 @@ img {
 }
 
 .nav-num {
-    color: var(--red);
+    color: var(--green);
     margin-right: 0.2rem;
 }
 
@@ -253,6 +253,18 @@ img {
     color: var(--gray);
 }
 
+.about-image {
+    grid-column: 4 / 13;
+    margin-bottom: 4rem;
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    max-height: 80vh;
+}
+
 /* 7. Selected Work Section */
 .project-list {
     grid-column: 1 / -1;
@@ -278,7 +290,7 @@ img {
     grid-column: 1 / 2;
     font-size: 2rem;
     font-weight: 700;
-    color: var(--red);
+    color: var(--green);
 }
 
 .project-layout-a .project-content {
@@ -501,8 +513,8 @@ img {
 }
 
 .contact-link:hover {
-    color: var(--red);
-    border-color: var(--red);
+    color: var(--green);
+    border-color: var(--green);
 }
 
 /* 13. Footer */
@@ -524,7 +536,7 @@ img {
     font-size: inherit;
     font-family: inherit;
     cursor: pointer;
-    color: var(--red);
+    color: var(--green);
     text-decoration: underline;
 }
 

@@ -27,6 +27,9 @@
     }
 
     /* About */
+    .about-image {
+        grid-column: 1 / -1;
+    }
     .about-statement {
         grid-column: 1 / -1;
         margin-bottom: 2rem;
