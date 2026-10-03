@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LANCE ANDRE FERMO — PORTFOLIO</title>
+    <meta name="description" content="Portfolio of Lance Fermo, Developer, Artist, and Editor.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+    <!-- Grid Overlay -->
+    <div id="grid-overlay" class="grid-overlay hidden">
+        <div class="grid-container">
+            <div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div>
+            <div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div>
+            <div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="site-nav">
+        <div class="nav-brand">LANCE ANDRE FERMO</div>
+        <button class="mobile-menu-toggle" aria-label="Toggle Menu">MENU</button>
+        <ul class="nav-links">
+            <li><a href="#about"><span class="nav-num">01</span> ABOUT</a></li>
+            <li><a href="#work"><span class="nav-num">02</span> WORK</a></li>
+            <li><a href="#creative"><span class="nav-num">03</span> CREATIVE</a></li>
+            <li><a href="#experience"><span class="nav-num">04</span> EXPERIENCE</a></li>
+            <li><a href="#contact"><span class="nav-num">05</span> CONTACT</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section grid-container">
+            <div class="hero-meta">01 / PORTFOLIO</div>
+            <h1 class="hero-title">LANCE ANDRE<br>FERMO</h1>
+            <div class="hero-desc">
+                INFORMATION TECHNOLOGY<br>
+                DEVELOPER / ARTIST / EDITOR
+            </div>
+            <div class="hero-year">2026</div>
+            <div class="hero-scroll">SCROLL &darr;</div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section grid-container section-padding">
+            <div class="section-meta">01 / ABOUT</div>
+            <h2 class="about-statement">
+                I BUILD.<br>
+                I CREATE.<br>
+                I TELL STORIES.
+            </h2>
+            <div class="about-text">
+                <p>I am an Information Technology graduate who blends technical precision with creative vision. My work spans across multiple disciplines: I am a developer building robust systems, an artist exploring visual forms, a photographer capturing moments, and an editor shaping narratives. I believe in functional design, clean code, and compelling visual storytelling.</p>
+            </div>
+        </section>
+
+        <!-- Selected Work (Development) -->
+        <section id="work" class="work-section grid-container section-padding">
+            <div class="section-meta">02 / SELECTED WORK</div>
+
+            <div class="project-list">
+                <!-- Project 01 -->
+                <article class="project-item project-layout-a">
+                    <div class="project-num">01</div>
+                    <div class="project-content">
+                        <h3 class="project-title">CLINIC MANAGEMENT SYSTEM</h3>
+                        <div class="project-category">WEB + MOBILE</div>
+                        <p class="project-desc">A comprehensive system to streamline clinic operations, managing patient records, appointments, and billing with a synchronized web and mobile interface.</p>
+                        <div class="project-tech">
+                            HTML / CSS / JavaScript / PHP / CodeIgniter / Flutter / Dart / Firebase
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="btn" target="_blank">GITHUB &nearr;</a>
+                            <a href="#" class="btn" target="_blank">DEMO &nearr;</a>
+                        </div>
+                    </div>
+                    <div class="project-visual">
+                        <div class="image-placeholder">PROJECT SCREENSHOT</div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Creative Work Section -->
+        <section id="creative" class="creative-section grid-container section-padding">
+            <div class="section-meta">03 / CREATIVE WORK</div>
+            
+            <div class="creative-filters">
+                <button class="filter-btn active" data-filter="all">ALL</button>
+                <button class="filter-btn" data-filter="art">ART</button>
+                <button class="filter-btn" data-filter="photography">PHOTOGRAPHY</button>
+                <button class="filter-btn" data-filter="design">DESIGN</button>
+                <button class="filter-btn" data-filter="video">VIDEO</button>
+            </div>
+
+            <div class="creative-gallery">
+                <!-- Gallery Item: Art -->
+                <figure class="gallery-item span-4" data-category="art">
+                    <div class="image-placeholder gallery-img" data-title="Graphite Portrait I" data-cat="ART">ARTWORK</div>
+                    <figcaption>
+                        <span class="gallery-title">GRAPHITE PORTRAIT I</span>
+                        <span class="gallery-cat">ART</span>
+                    </figcaption>
+                </figure>
+
+                <!-- Gallery Item: Photography -->
+                <figure class="gallery-item span-8" data-category="photography">
+                    <div class="image-placeholder gallery-img" data-title="Urban Landscape" data-cat="PHOTOGRAPHY">PHOTOGRAPHY</div>
+                    <figcaption>
+                        <span class="gallery-title">URBAN LANDSCAPE</span>
+                        <span class="gallery-cat">PHOTOGRAPHY</span>
+                    </figcaption>
+                </figure>
+
+                <!-- Gallery Item: Art -->
+                <figure class="gallery-item span-6" data-category="art">
+                    <div class="image-placeholder gallery-img" data-title="Charcoal Study" data-cat="ART">ARTWORK</div>
+                    <figcaption>
+                        <span class="gallery-title">CHARCOAL STUDY</span>
+                        <span class="gallery-cat">ART</span>
+                    </figcaption>
+                </figure>
+
+                <!-- Gallery Item: Design -->
+                <figure class="gallery-item span-6" data-category="design">
+                    <div class="image-placeholder gallery-img" data-title="Poster Series" data-cat="DESIGN">DESIGN</div>
+                    <figcaption>
+                        <span class="gallery-title">POSTER SERIES</span>
+                        <span class="gallery-cat">DESIGN</span>
+                    </figcaption>
+                </figure>
+                
+                <!-- Gallery Item: Photography -->
+                <figure class="gallery-item span-12" data-category="photography">
+                    <div class="image-placeholder gallery-img" data-title="Nature Editorial" data-cat="PHOTOGRAPHY">PHOTOGRAPHY</div>
+                    <figcaption>
+                        <span class="gallery-title">NATURE EDITORIAL</span>
+                        <span class="gallery-cat">PHOTOGRAPHY</span>
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="experience-section grid-container section-padding">
+            <div class="section-meta">04 / EXPERIENCE</div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-role">EDITOR-IN-CHIEF</div>
+                    <div class="timeline-org">THE SOUTH TRAIL, USTP CLAVERIA</div>
+                    <div class="timeline-desc">
+                        Led editorial direction, managed a team of writers and creatives, oversaw publication cycles, and ensured the journalistic integrity and visual quality of the official student publication.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievements Section -->
+        <section class="achievements-section grid-container section-padding">
+            <div class="section-meta">05 / ACHIEVEMENTS</div>
+            
+            <ul class="achievement-list">
+                <li>
+                    <span class="ach-year">2023</span>
+                    <span class="ach-event">MASTS</span>
+                    <span class="ach-cat">PENCIL DRAWING</span>
+                    <span class="ach-result">PARTICIPANT / AWARD</span>
+                </li>
+                <li>
+                    <span class="ach-year">2022</span>
+                    <span class="ach-event">ARCU</span>
+                    <span class="ach-cat">PENCIL DRAWING</span>
+                    <span class="ach-result">COMPETITOR</span>
+                </li>
+                <li>
+                    <span class="ach-year">2021</span>
+                    <span class="ach-event">PASUC-NCAF</span>
+                    <span class="ach-cat">VISUAL ARTS</span>
+                    <span class="ach-result">REPRESENTATIVE</span>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Resume Section -->
+        <section class="resume-section grid-container section-padding">
+            <div class="section-meta">06 / RESUME</div>
+            
+            <div class="resume-content">
+                <h2 class="resume-name">LANCE ANDRE FERMO</h2>
+                <div class="resume-field">INFORMATION TECHNOLOGY</div>
+                <div class="resume-actions">
+                    <a href="assets/documents/lance-fermo-resume.pdf" class="btn resume-btn" target="_blank">VIEW RESUME</a>
+                    <a href="assets/documents/lance-fermo-resume.pdf" class="btn resume-btn" download>DOWNLOAD PDF</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section grid-container section-padding">
+            <div class="section-meta">07 / CONTACT</div>
+            
+            <h2 class="contact-title">
+                LET'S<br>
+                WORK<br>
+                TOGETHER.
+            </h2>
+            
+            <div class="contact-links">
+                <a href="mailto:placeholder@example.com" class="contact-link">EMAIL &nearr;</a>
+                <a href="https://github.com/codexversailles" class="contact-link" target="_blank">GITHUB &nearr;</a>
+                <a href="#" class="contact-link" target="_blank">LINKEDIN &nearr;</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer grid-container">
+        <div class="footer-name">LANCE ANDRE FERMO</div>
+        <div class="footer-year">&copy; <span id="current-year">2026</span></div>
+        <div class="footer-tech">HTML / CSS / JAVASCRIPT</div>
+        <div class="footer-grid-toggle">
+            <button id="toggle-grid-btn">GRID ON / OFF</button>
+        </div>
+    </footer>
+
+    <!-- Image Viewer Modal -->
+    <div id="image-modal" class="image-modal hidden">
+        <button class="modal-close" aria-label="Close Modal">&times;</button>
+        <div class="modal-content">
+            <div class="modal-image-container">
+                <div id="modal-image" class="image-placeholder modal-ph"></div>
+            </div>
+            <div class="modal-metadata">
+                <div class="modal-counter">01 / 24</div>
+                <div id="modal-title" class="modal-title">TITLE</div>
+                <div id="modal-cat" class="modal-cat">CATEGORY</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
