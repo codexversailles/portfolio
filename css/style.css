@@ -389,7 +389,9 @@ img { display: block; width: 100%; height: auto; object-fit: cover; }
 .about-text {
     grid-column: 9 / 13;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
 }
 
 .about-text p {
@@ -1138,4 +1140,5 @@ figcaption {
     opacity: 1;
     transform: translateX(0);
 }
+
 
