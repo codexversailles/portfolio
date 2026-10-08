@@ -157,6 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (modal && !modal.classList.contains('hidden')) return;
 
         const keyMap = {
+            '0': '#hero',
             '1': '#about',
             '2': '#skills',
             '3': '#work',
