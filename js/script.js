@@ -4,10 +4,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 0. Intro Preloader
     const introScreen = document.getElementById('intro-screen');
+    const heroTitle = document.querySelector('.hero-fade-left');
+    
+    document.body.style.overflow = 'hidden'; // lock scroll
+
     if (introScreen) {
         setTimeout(() => {
             introScreen.classList.add('hidden');
+            document.body.style.overflow = ''; // unlock scroll
+            if (heroTitle) heroTitle.classList.add('visible');
         }, 3400); // 3.4 seconds to let the staggered animations finish and hold
+    } else {
+        document.body.style.overflow = '';
+        if (heroTitle) heroTitle.classList.add('visible');
     }
 
     // 1. Current Year
@@ -185,3 +194,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
