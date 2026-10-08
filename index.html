@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursor-ring"></div>
+
 
     <!-- Grid Overlay -->
     <div id="grid-overlay" class="grid-overlay hidden">
@@ -38,26 +41,33 @@
 
     <main>
         <!-- Hero Section -->
-        <section id="hero" class="hero-section grid-container">
-            <div class="hero-image fade-up">
+        <section id="hero" class="hero-section">
+            <div class="hero-bg"></div>
+            <div class="hero-image">
                 <img src="assets/images/profile/lance-fermo.jpg" alt="Lance Andre Fermo">
             </div>
-            <div class="hero-text-wrapper fade-up">
-                <h1 class="hero-title">LANCE<br>ANDRE<br>FERMO</h1>
-                <div class="hero-desc">
-                    SPACE TIME DECORATOR<br>
-                    DEVELOPER / ARTIST / EDITOR
+            <div class="hero-content">
+                <div class="hero-title-block fade-up">
+                    <h1 class="hero-title">Lance<br><em>Andre</em><br>Fermo</h1>
+                </div>
+                <div class="hero-side fade-up">
+                    <div class="hero-tagline">Developer &amp; Creative<br>Information Technology</div>
+                    <div class="hero-desc">
+                        Builder. Artist.<br>
+                        Editor. Storyteller.
+                    </div>
                 </div>
             </div>
+            <div class="hero-scroll-line"></div>
         </section>
 
         <!-- About Section -->
         <section id="about" class="about-section grid-container section-padding">
             <div class="section-meta fade-up">01 / ABOUT</div>
             <h2 class="about-statement fade-up">
-                I BUILD.<br>
-                I CREATE.<br>
-                I TELL STORIES.
+                I Build.<br>
+                I <em>Create.</em><br>
+                I Tell Stories.
             </h2>
             <div class="about-text fade-up">
                 <p>I am an Information Technology student who blends technical precision with creative vision. My work spans across multiple disciplines: I am a developer building robust systems, an artist exploring visual forms, a photographer capturing moments, and an editor shaping narratives. I believe in functional design, clean code, and compelling visual storytelling.</p>
@@ -348,9 +358,9 @@
             <div class="section-meta fade-up">08 / CONTACT</div>
             
             <h2 class="contact-title fade-up">
-                LET'S<br>
-                WORK<br>
-                TOGETHER.
+                Let's<br>
+                <em>Work</em><br>
+                Together.
             </h2>
             
             <div class="contact-links fade-up">
@@ -389,6 +399,10 @@
     <script src="js/script.js"></script>
 </body>
 </html>
+
+
+
+
 
 
 
