@@ -2,6 +2,14 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    // 0. Intro Preloader
+    const introScreen = document.getElementById('intro-screen');
+    if (introScreen) {
+        setTimeout(() => {
+            introScreen.classList.add('hidden');
+        }, 3400); // 3.4 seconds to let the staggered animations finish and hold
+    }
+
     // 1. Current Year
     const yearEl = document.getElementById('current-year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
