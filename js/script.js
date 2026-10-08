@@ -98,12 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 5. Grid Toggle
-    const gridToggleBtn = document.getElementById('toggle-grid-btn');
-    const gridOverlay   = document.getElementById('grid-overlay');
-    if (gridToggleBtn && gridOverlay) {
-        gridToggleBtn.addEventListener('click', () => gridOverlay.classList.toggle('hidden'));
-    }
+    
 
     // 6. Gallery Filters
     const filterBtns  = document.querySelectorAll('.filter-btn');
@@ -195,6 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
 
 
 
