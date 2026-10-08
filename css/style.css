@@ -264,7 +264,6 @@ img { display: block; width: 100%; height: auto; object-fit: cover; }
     line-height: 0.9;
     letter-spacing: -0.02em;
     color: var(--white);
-    text-transform: uppercase;
 }
 
 .hero-title em {
