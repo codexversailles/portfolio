@@ -146,4 +146,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
         fadeElements.forEach(el => observer.observe(el));
     }
+
+    // 9. Keyboard Navigation
+    document.addEventListener('keydown', (e) => {
+        // Ignore if user is typing in an input (future proofing)
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        
+        // Ignore if image modal is open
+        const modal = document.getElementById('image-modal');
+        if (modal && !modal.classList.contains('hidden')) return;
+
+        const keyMap = {
+            '1': '#about',
+            '2': '#skills',
+            '3': '#work',
+            '4': '#creative',
+            '5': '#experience',
+            '6': '.achievements-section',
+            '7': '.resume-section',
+            '8': '#contact'
+        };
+
+        const targetSelector = keyMap[e.key];
+        if (targetSelector) {
+            const targetElement = document.querySelector(targetSelector);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    });
 });
