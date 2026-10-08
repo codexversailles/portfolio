@@ -6,11 +6,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const yearEl = document.getElementById('current-year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    // 2. Custom Cursor
+    // 2. Custom Cursor (desktop/pointer devices only)
     const cursor     = document.getElementById('cursor');
     const cursorRing = document.getElementById('cursor-ring');
 
-    if (cursor && cursorRing) {
+    const isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+
+    if (cursor && cursorRing && !isTouch) {
         let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
 
         document.addEventListener('mousemove', e => {
