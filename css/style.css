@@ -2,24 +2,24 @@
 
 /* 1. Variables & Setup */
 :root {
-    --black: #111111;
-    --white: #f5f5f2;
-    --green: #00A651;
-    --gray: #777777;
-    --light-gray: #dddddd;
+    --black: #ffffff;
+    --white: #0a0a0a;
+    --green: #c0c0c0;
+    --gray: #999999;
+    --light-gray: #222222;
 
-    --font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-primary: "Montserrat", "Helvetica Neue", sans-serif;
+    --font-heading: "Cormorant Garamond", "Times New Roman", serif;
     
     --grid-columns: 12;
     --grid-gap: 20px;
     --page-margin: 4vw;
 
-    /* Typography scale */
-    --text-meta: 0.75rem; /* 12px */
-    --text-body: 1rem;    /* 16px */
-    --text-h3: 1.5rem;    /* 24px */
-    --text-h2: 4vw;       /* Large statement */
-    --text-hero: 8vw;     /* Huge name */
+    --text-meta: 0.75rem;
+    --text-body: 1rem;
+    --text-h3: 1.5rem;
+    --text-h2: 4vw;
+    --text-hero: 8vw;
 }
 
 /* Base Reset */
@@ -43,7 +43,7 @@ body {
     background-position: center top;
     background-attachment: fixed;
     color: var(--black);
-    font-family: var(--font-family);
+    font-family: var(--font-primary);
     line-height: 1.4;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
@@ -161,7 +161,7 @@ img {
     align-items: center;
     padding: 1rem var(--page-margin);
     z-index: 1000;
-    background: rgba(245, 245, 242, 0.9);
+    background: rgba(10, 10, 10, 0.95);
     backdrop-filter: blur(5px);
     border-bottom: 1px solid var(--light-gray);
 }
@@ -226,6 +226,8 @@ img {
     height: auto;
     object-fit: cover;
     max-height: 70vh;
+
+    filter: grayscale(100%) contrast(1.1);
 }
 
 .hero-text-wrapper {
@@ -245,6 +247,10 @@ img {
     text-transform: uppercase;
     margin-bottom: 2rem;
     color: var(--black);
+
+    font-family: var(--font-heading);
+    font-weight: 500;
+    letter-spacing: 0.05em;
 }
 
 .hero-desc {
@@ -273,6 +279,9 @@ img {
     line-height: 1;
     letter-spacing: -0.02em;
     font-weight: 700;
+
+    font-family: var(--font-heading);
+    font-weight: 500;
 }
 
 .about-text {
@@ -314,6 +323,8 @@ img {
     width: 100%;
     height: auto;
     object-fit: contain;
+
+    filter: invert(1) hue-rotate(180deg) brightness(1.5);
 }
 
 #skills {
@@ -333,6 +344,10 @@ img {
     text-transform: uppercase;
     letter-spacing: -0.02em;
     color: var(--black);
+
+    font-family: var(--font-heading);
+    font-weight: 600;
+    letter-spacing: 0.1em;
 }
 
 .skill-list {
@@ -414,6 +429,10 @@ img {
     line-height: 1.1;
     margin-bottom: 0.5rem;
     text-transform: uppercase;
+
+    font-family: var(--font-heading);
+    font-weight: 500;
+    letter-spacing: 0.02em;
 }
 
 .project-category {
@@ -728,4 +747,8 @@ img {
         scroll-behavior: auto !important;
     }
 }
+
+
+
+
 
