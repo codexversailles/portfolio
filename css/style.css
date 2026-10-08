@@ -1128,12 +1128,13 @@ figcaption {
     100% { opacity: 1; transform: translateX(0); }
 }
 
-.hero-fade-left {
+.hero-fade-right {
     opacity: 0;
-    transform: translateX(100px);
+    transform: translateX(-100px);
     transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1), transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.hero-fade-left.visible {
+.hero-fade-right.visible {
     opacity: 1;
     transform: translateX(0);
 }
+
