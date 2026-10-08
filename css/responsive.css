@@ -11,6 +11,10 @@
     .nav-links { gap: 1.5rem; }
 
     /* Hero */
+    .hero-image { left: 0; }
+    .hero-image::before { background: linear-gradient(to top, var(--black) 0%, transparent 60%); }
+    .hero-image img { object-position: center top; }
+    
     .hero-content { gap: 1rem; }
     .hero-title-block { grid-column: 1 / 10; }
     .hero-side { grid-column: 10 / 13; }
