@@ -6,19 +6,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const introScreen = document.getElementById('intro-screen');
     
     
-    document.body.style.overflow = 'hidden'; // lock scroll
-
     if (introScreen) {
         setTimeout(() => {
             introScreen.classList.add('hidden');
-            document.body.style.overflow = ''; // unlock scroll
             setTimeout(() => {
                 const heroTitleRight = document.querySelector('.hero-fade-right');
                 if (heroTitleRight) heroTitleRight.classList.add('visible');
             }, 1000);
         }, 3400); // 3.4 seconds to let the staggered animations finish and hold
     } else {
-        document.body.style.overflow = '';
         setTimeout(() => {
             const heroTitleRight = document.querySelector('.hero-fade-right');
             if (heroTitleRight) heroTitleRight.classList.add('visible');
@@ -146,8 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const closeModal = () => {
             modal.classList.add('hidden');
-            document.body.style.overflow = '';
-        };
+            };
 
         modalClose.addEventListener('click', closeModal);
         modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
@@ -200,6 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
 
 
 
