@@ -1,23 +1,29 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LANCE ANDRE FERMO — PORTFOLIO</title>
+    <title>LANCE ANDRE FERMO â€” PORTFOLIO</title>
     <meta name="description" content="Portfolio of Lance Fermo, Developer, Artist, and Editor.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <script>
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+    </script>
 </head>
 <body>
     <!-- Intro Preloader -->
     <div id="intro-screen" class="intro-screen">
         <div class="intro-text">
-            <div class="intro-line intro-left">LANCE</div>
-            <div class="intro-line intro-right"><em>ANDRE</em></div>
-            <div class="intro-line intro-left">FERMO</div>
+            <div class="intro-line intro-left">Lance</div>
+            <div class="intro-line intro-right"><em>Andre</em></div>
+            <div class="intro-line intro-left">Fermo</div>
         </div>
     </div>
     <div class="cursor" id="cursor"></div>
@@ -26,15 +32,18 @@
 
     <!-- Navigation -->
     <nav class="site-nav">
-        <div class="nav-brand">LANCE ANDRE FERMO</div>
+        <a href="#hero" class="nav-brand">lance.</a>
         <button class="mobile-menu-toggle" aria-label="Toggle Menu">MENU</button>
         <ul class="nav-links">
             <li><a href="#about"><span class="nav-num">01</span> ABOUT</a></li>
-            <li><a href="#skills"><span class="nav-num">02</span> SKILLS</a></li>
-            <li><a href="#work"><span class="nav-num">03</span> WORK</a></li>
-            <li><a href="#creative"><span class="nav-num">04</span> CREATIVE</a></li>
-            <li><a href="#experience"><span class="nav-num">05</span> EXPERIENCE</a></li>
-            <li><a href="#contact"><span class="nav-num">08</span> CONTACT</a></li>
+            <li><a href="#press"><span class="nav-num">02</span> FEATURES</a></li>
+            <li><a href="#skills"><span class="nav-num">03</span> SKILLS</a></li>
+            <li><a href="#work"><span class="nav-num">04</span> WORK</a></li>
+            <li><a href="#creative"><span class="nav-num">05</span> CREATIVE</a></li>
+            <li><a href="#experience"><span class="nav-num">06</span> EXPERIENCE</a></li>
+            <li><a href="#achievements"><span class="nav-num">07</span> ACHIEVEMENTS</a></li>
+            <li><a href="#resume"><span class="nav-num">08</span> RESUME</a></li>
+            <li><a href="#contact"><span class="nav-num">09</span> CONTACT</a></li>
         </ul>
     </nav>
 
@@ -75,11 +84,95 @@
                 <p>I believe good work should not only work well, but feel intentional. Clean code. Thoughtful design. Honest stories.</p>
                 <p>I am still learning, still creating, and still finding new ways to turn ideas into something real.</p>
             </div>
-                </section>
+        </section>
+
+        <!-- Press & Features Section -->
+        <section id="press" class="press-section grid-container section-padding">
+            <div class="section-meta fade-up">02 / FEATURES</div>
+            
+            <div class="press-header fade-up">
+                <h2 class="press-title">Featured<br><em>Articles.</em></h2>
+                <p class="press-subtitle">Media coverage, editorial appointments, and national artistic recognitions.</p>
+            </div>
+
+            <div class="press-grid fade-up">
+                <!-- Article 1: Editor in Chief Appointment -->
+                <article class="press-card">
+                    <div class="press-thumb">
+                        <img src="assets/images/articles/article-editorial-board.jpg" alt="The Next Step Begins: Editorial Board 2026" class="press-img">
+                    </div>
+                    <div class="press-body">
+                        <div class="press-card-meta">
+                            <span class="press-source">THE SOUTH TRAIL</span>
+                            <span class="press-year">2026</span>
+                        </div>
+                        <h3 class="press-headline">The Next Step Begins: Editorial Board 2026</h3>
+                        <p class="press-excerpt">Official announcement of Lance Andre Fermo stepping up as Editor-in-Chief of The South Trail Publication, leading journalistic integrity and creative publication cycles.</p>
+                        <div class="press-card-action">
+                            <a href="https://www.facebook.com/share/p/1BuCy13oLE/" target="_blank" rel="noopener noreferrer" class="btn press-btn">READ ARTICLE &nearr;</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article 2: PASUC National 4th Place -->
+                <article class="press-card">
+                    <div class="press-thumb">
+                        <img src="assets/images/articles/article-pasuc-4th.jpg" alt="USTP Claveria Places 4th in National Visual Arts Competition" class="press-img">
+                    </div>
+                    <div class="press-body">
+                        <div class="press-card-meta">
+                            <span class="press-source">THE SOUTH TRAIL</span>
+                            <span class="press-year">2026</span>
+                        </div>
+                        <h3 class="press-headline">USTP Claveria Places 4th in National Visual Arts Competition</h3>
+                        <p class="press-excerpt">Showcasing artistic mastery on the national stage, representing Northern Mindanao in Pencil Drawing at the prestigious PASUC National Culture and the Arts Festival.</p>
+                        <div class="press-card-action">
+                            <a href="https://www.facebook.com/share/p/1Ay1BCyjen/" target="_blank" rel="noopener noreferrer" class="btn press-btn">READ ARTICLE &nearr;</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article 3: Official PASUC Results -->
+                <article class="press-card">
+                    <div class="press-thumb">
+                        <img src="assets/images/articles/article-pasuc-official.jpg" alt="NCAF 2026 Official Results: Pencil Drawing" class="press-img">
+                    </div>
+                    <div class="press-body">
+                        <div class="press-card-meta">
+                            <span class="press-source">PASUC-NCAF</span>
+                            <span class="press-year">2026</span>
+                        </div>
+                        <h3 class="press-headline">NCAF 2026 Official Results: Pencil Drawing</h3>
+                        <p class="press-excerpt">Official national festival standing recognition among state universities and colleges nationwide at the 12th PASUC National Culture and the Arts Festival.</p>
+                        <div class="press-card-action">
+                            <a href="https://www.facebook.com/share/p/1ChxJ2Cho4/" target="_blank" rel="noopener noreferrer" class="btn press-btn">READ ARTICLE &nearr;</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article 4: MASTS 2025 Champion Victory -->
+                <article class="press-card">
+                    <div class="press-thumb">
+                        <img src="assets/images/articles/article-masts-champion.jpg" alt="Lance Andre Fermo Sketches His Way to Victory at MASTS 2025" class="press-img">
+                    </div>
+                    <div class="press-body">
+                        <div class="press-card-meta">
+                            <span class="press-source">THE SOUTH TRAIL</span>
+                            <span class="press-year">2025</span>
+                        </div>
+                        <h3 class="press-headline">Lance Andre Fermo Sketches His Way to Victory at MASTS 2025</h3>
+                        <p class="press-excerpt">Securing Gold as Regional Champion in Pencil Drawing at the Mindanao Association of State Tertiary Schools (MASTS 2025) Friendship Games and Cultural Festival.</p>
+                        <div class="press-card-action">
+                            <a href="https://www.facebook.com/share/p/1Mf9gPtZrz/" target="_blank" rel="noopener noreferrer" class="btn press-btn">READ ARTICLE &nearr;</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
 
         <!-- Skills Section -->
         <section id="skills" class="skills-section grid-container section-padding">
-            <div class="section-meta fade-up">02 / SKILLS</div>
+            <div class="section-meta fade-up">03 / SKILLS</div>
             
             <div class="skills-wrapper fade-up">
                 <div class="skills-grid">
@@ -131,7 +224,7 @@
 
         <!-- Selected Work (Development) -->
         <section id="work" class="work-section grid-container section-padding">
-            <div class="section-meta fade-up">03 / SELECTED WORK</div>
+            <div class="section-meta fade-up">04 / SELECTED WORK</div>
 
             <div class="project-list">
                 <!-- Project 01 -->
@@ -234,54 +327,335 @@
 
         <!-- Creative Work Section -->
         <section id="creative" class="creative-section grid-container section-padding">
-            <div class="section-meta fade-up">04 / CREATIVE WORK</div>
+            <div class="section-meta fade-up">05 / CREATIVE WORK</div>
             
             <div class="creative-filters fade-up">
                 <button class="filter-btn active" data-filter="all">ALL</button>
                 <button class="filter-btn" data-filter="art">ART</button>
-                <button class="filter-btn" data-filter="photography">PHOTOGRAPHY</button>
                 <button class="filter-btn" data-filter="design">DESIGN</button>
-                <button class="filter-btn" data-filter="video">VIDEO</button>
+                <button class="filter-btn" data-filter="photography">PHOTOGRAPHY</button>
             </div>
 
             <div class="creative-gallery">
-                <!-- Gallery Item: Art -->
-                <figure class="gallery-item fade-up span-4" data-category="art">
-                    <div class="image-placeholder gallery-img" data-title="" data-cat="">ARTWORK</div>
-                    <figcaption>
-                        <span class="gallery-cat">ART</span>
+                <!-- Item 1: Jaro Belfry (Art) -->
+                <figure class="gallery-item fade-up span-4 ar-portrait" data-category="art" data-title="Jaro Belfry" data-cat="Art &middot; Graphite">
+                    <div class="gallery-thumb">
+                        <img src="assets/images/creative/art/670644637_122220867008052366_8234587297556948451_n.jpg" alt="Jaro Belfry - PASUC-NCAF 4th Place" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption class="gallery-caption">
+                        <div class="gallery-title">Jaro Belfry</div>
+                        <div class="gallery-meta-row">
+                            <span class="gallery-cat">Art &middot; Graphite</span>
+                            <span class="gallery-sub">PASUC-NCAF 4th Place (2026)</span>
+                        </div>
                     </figcaption>
                 </figure>
 
-                <!-- Gallery Item: Photography -->
-                <figure class="gallery-item fade-up span-8" data-category="photography">
-                    <div class="image-placeholder gallery-img" data-title="" data-cat="">PHOTOGRAPHY</div>
-                    <figcaption>
-                        <span class="gallery-cat">PHOTOGRAPHY</span>
+                <!-- Item 2: PASUC-NCAF National Awarding (Design / Photo) -->
+                <figure class="gallery-item fade-up span-8 ar-landscape" data-category="design photography" data-title="PASUC-NCAF 2026 National Awarding" data-cat="Editorial &middot; Recognition">
+                    <div class="gallery-thumb">
+                        <img src="assets/images/creative/design/Portfolio_3.jpg" alt="PASUC-NCAF 2026 National Awarding" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption class="gallery-caption">
+                        <div class="gallery-title">PASUC-NCAF 2026 National Awarding</div>
+                        <div class="gallery-meta-row">
+                            <span class="gallery-cat">Editorial &middot; Recognition</span>
+                            <span class="gallery-sub">Mentorship &amp; National Feature Sheet</span>
+                        </div>
                     </figcaption>
                 </figure>
 
-                <!-- Gallery Item: Art -->
-                <figure class="gallery-item fade-up span-6" data-category="art">
-                    <div class="image-placeholder gallery-img" data-title="" data-cat="">ARTWORK</div>
-                    <figcaption>
-                        <span class="gallery-cat">ART</span>
+                <!-- Item 3: Figure Study (Art) -->
+                <figure class="gallery-item fade-up span-4 ar-portrait" data-category="art" data-title="Figure Study" data-cat="Art &middot; Acrylic">
+                    <div class="gallery-thumb">
+                        <img src="assets/images/creative/art/641624773_958814849806278_7491235537329423035_n.jpg" alt="Figure Study Acrylic on Canvas" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption class="gallery-caption">
+                        <div class="gallery-title">Figure Study</div>
+                        <div class="gallery-meta-row">
+                            <span class="gallery-cat">Art &middot; Acrylic</span>
+                            <span class="gallery-sub">Acrylic on Canvas (2026)</span>
+                        </div>
                     </figcaption>
                 </figure>
 
-                <!-- Gallery Item: Design -->
-                <figure class="gallery-item fade-up span-6" data-category="design">
-                    <div class="image-placeholder gallery-img" data-title="" data-cat="">DESIGN</div>
-                    <figcaption>
-                        <span class="gallery-cat">DESIGN</span>
+                <!-- Item 4: Kartunista Cover (Design) -->
+                <figure class="gallery-item fade-up span-4 ar-portrait" data-category="design" data-title="Kartunista Magazine Cover" data-cat="Design &middot; Publication">
+                    <div class="gallery-thumb">
+                        <img src="assets/images/creative/design/kartunista.png" alt="Kartunista Magazine Cover" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption class="gallery-caption">
+                        <div class="gallery-title">Kartunista Magazine Cover</div>
+                        <div class="gallery-meta-row">
+                            <span class="gallery-cat">Design &middot; Publication</span>
+                            <span class="gallery-sub">SPAMAST-Agrifisher Feature</span>
+                        </div>
                     </figcaption>
                 </figure>
-                
-                <!-- Gallery Item: Photography -->
-                <figure class="gallery-item fade-up span-12" data-category="photography">
-                    <div class="image-placeholder gallery-img" data-title="" data-cat="">PHOTOGRAPHY</div>
-                    <figcaption>
-                        <span class="gallery-cat">PHOTOGRAPHY</span>
+
+                <!-- Item 5: Untitled Mother & Child (Art) -->
+                <figure class="gallery-item fade-up span-4 ar-portrait" data-category="art" data-title="Untitled (Mother &amp; Child)" data-cat="Art &middot; Graphite">
+                    <div class="gallery-thumb">
+                        <img src="assets/images/creative/art/653526466_974195454934884_467951531517287812_n%20(1).jpg" alt="Untitled Mother &amp; Child Graphite Study" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption class="gallery-caption">
+                        <div class="gallery-title">Untitled (Mother &amp; Child)</div>
+                        <div class="gallery-meta-row">
+                            <span class="gallery-cat">Art &middot; Graphite</span>
+                            <span class="gallery-sub">Graphite on Paper (2026)</span>
+                        </div>
+                    </figcaption>
+                </figure>
+
+                <!-- Item 6: Lotus Lake Pavilion (Art) -->
+                <figure class="gallery-item fade-up span-8 ar-landscape" data-category="art" data-title="Lotus Lake Pavilion" data-cat="Art &middot; Landscape">
+                    <div class="gallery-thumb">
+                        <img src="assets/images/creative/art/649277296_969646158723147_4885338536179205128_n.jpg" alt="Lotus Lake Pavilion Architectural Graphite" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption class="gallery-caption">
+                        <div class="gallery-title">Lotus Lake Pavilion</div>
+                        <div class="gallery-meta-row">
+                            <span class="gallery-cat">Art &middot; Landscape</span>
+                            <span class="gallery-sub">Architectural Graphite Study</span>
+                        </div>
+                    </figcaption>
+                </figure>
+
+                <!-- Item 7: National Arts Month Poster (Design) -->
+                <figure class="gallery-item fade-up span-4 ar-portrait" data-category="design" data-title="National Arts Month Poster" data-cat="Design &middot; Poster">
+                    <div class="gallery-thumb">
+                        <img src="assets/images/creative/design/posterrrrrrrrr-web.jpg" data-fullscreen="assets/images/creative/design/posterrrrrrrrr.png" alt="February is National Arts Month Poster" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption class="gallery-caption">
+                        <div class="gallery-title">National Arts Month Poster</div>
+                        <div class="gallery-meta-row">
+                            <span class="gallery-cat">Design &middot; Poster</span>
+                            <span class="gallery-sub">Alampat Handurawan Visual Arts</span>
+                        </div>
+                    </figcaption>
+                </figure>
+
+                <!-- Item 8: Artist Profile & Painting (Design / Photo) -->
+                <figure class="gallery-item fade-up span-6 ar-landscape" data-category="design photography" data-title="Artist Profile &amp; Studio Painting" data-cat="Editorial &middot; Bio">
+                    <div class="gallery-thumb">
+                        <img src="assets/images/creative/design/Portfolio_1.jpg" alt="Artist Profile &amp; Studio Painting" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption class="gallery-caption">
+                        <div class="gallery-title">Artist Profile &amp; Studio Painting</div>
+                        <div class="gallery-meta-row">
+                            <span class="gallery-cat">Editorial &middot; Bio</span>
+                            <span class="gallery-sub">Studio Practice &amp; Academic Training</span>
+                        </div>
+                    </figcaption>
+                </figure>
+
+                <!-- Item 9: Graphite Artistry Sheet (Design) -->
+                <figure class="gallery-item fade-up span-6 ar-landscape" data-category="design" data-title="Graphite Artistry Portfolio Sheet" data-cat="Editorial &middot; Bio">
+                    <div class="gallery-thumb">
+                        <img src="assets/images/creative/design/Portfolio_2.jpg" alt="Graphite Artistry Portfolio Sheet" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption class="gallery-caption">
+                        <div class="gallery-title">Graphite Artistry Portfolio Sheet</div>
+                        <div class="gallery-meta-row">
+                            <span class="gallery-cat">Editorial &middot; Bio</span>
+                            <span class="gallery-sub">Competitions &amp; Technique Overview</span>
+                        </div>
+                    </figcaption>
+                </figure>
+
+                <!-- Item 10: Elderly Portrait (Art) -->
+                <figure class="gallery-item fade-up span-4 ar-square" data-category="art" data-title="Elderly Portrait" data-cat="Art &middot; Charcoal &amp; Graphite">
+                    <div class="gallery-thumb">
+                        <img src="assets/images/creative/art/649507811_969645658723197_2876081457140258569_n.jpg" alt="Elderly Portrait Study" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption class="gallery-caption">
+                        <div class="gallery-title">Untitled Portrait</div>
+                        <div class="gallery-meta-row">
+                            <span class="gallery-cat">Art &middot; Charcoal &amp; Graphite</span>
+                            <span class="gallery-sub">Traditional Woven Textile Study</span>
+                        </div>
+                    </figcaption>
+                </figure>
+
+                <!-- Item 11: Calling For Submissions: Nostalgia (Design) -->
+                <figure class="gallery-item fade-up span-4 ar-square" data-category="design" data-title="Calling For Submissions: Nostalgia" data-cat="Design &middot; Publication">
+                    <div class="gallery-thumb">
+                        <img src="assets/images/creative/design/Document5-web.jpg" data-fullscreen="assets/images/creative/design/Document5.png" alt="Calling For Submissions: Nostalgia" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption class="gallery-caption">
+                        <div class="gallery-title">Calling For Submissions: Nostalgia</div>
+                        <div class="gallery-meta-row">
+                            <span class="gallery-cat">Design &middot; Publication</span>
+                            <span class="gallery-sub">The South Trail Announcement</span>
+                        </div>
+                    </figcaption>
+                </figure>
+
+                <!-- Item 12: The Earth was Made for Lovers (Design) -->
+                <figure class="gallery-item fade-up span-4 ar-square" data-category="design" data-title="The Earth was Made for Lovers" data-cat="Design &middot; Literary">
+                    <div class="gallery-thumb">
+                        <img src="assets/images/creative/design/The earth was made for lovers-web.jpg" data-fullscreen="assets/images/creative/design/The earth was made for lovers.png" alt="The Earth was Made for Lovers Literary Piece" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption class="gallery-caption">
+                        <div class="gallery-title">The Earth was Made for Lovers</div>
+                        <div class="gallery-meta-row">
+                            <span class="gallery-cat">Design &middot; Literary</span>
+                            <span class="gallery-sub">Visual Poetry Piece by Lance Fermo</span>
+                        </div>
+                    </figcaption>
+                </figure>
+
+                <!-- Item 13: Alampat Handurawan Visual Identity Banner (Design) -->
+                <figure class="gallery-item fade-up span-8 ar-landscape" data-category="design" data-title="Alampat Handurawan Brand Banner" data-cat="Design &middot; Brand Identity">
+                    <div class="gallery-thumb">
+                        <img src="assets/images/creative/design/HAnDurawAN-web.jpg" data-fullscreen="assets/images/creative/design/HAnDurawAN.png" alt="Alampat Handurawan Visual Identity Banner" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption class="gallery-caption">
+                        <div class="gallery-title">Alampat Handurawan Brand Banner</div>
+                        <div class="gallery-meta-row">
+                            <span class="gallery-cat">Design &middot; Brand Identity</span>
+                            <span class="gallery-sub">USTP-Claveria Visual Arts Collective</span>
+                        </div>
+                    </figcaption>
+                </figure>
+
+                <!-- Item 14: General Champion Still Life (Art) -->
+                <figure class="gallery-item fade-up span-4 ar-portrait" data-category="art" data-title="General Champion Still Life" data-cat="Art &middot; Graphite">
+                    <div class="gallery-thumb">
+                        <img src="assets/images/creative/art/649992947_969646842056412_5138737453578185241_n.jpg" alt="General Champion Trophy Still Life" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption class="gallery-caption">
+                        <div class="gallery-title">Untitled Still Life</div>
+                        <div class="gallery-meta-row">
+                            <span class="gallery-cat">Art &middot; Graphite</span>
+                            <span class="gallery-sub">MOSCAT Palaro Still Life Study</span>
+                        </div>
+                    </figcaption>
+                </figure>
+
+                <!-- Item 15: Araw ng mga Bayani Tribute (Design) -->
+                <figure class="gallery-item fade-up span-4 ar-portrait" data-category="design" data-title="Araw ng mga Bayani Feature" data-cat="Design &middot; Editorial Graphic">
+                    <div class="gallery-thumb">
+                        <img src="assets/images/creative/design/national heroes day.png" alt="Araw ng mga Bayani Feature" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption class="gallery-caption">
+                        <div class="gallery-title">Araw ng mga Bayani Feature</div>
+                        <div class="gallery-meta-row">
+                            <span class="gallery-cat">Design &middot; Editorial Graphic</span>
+                            <span class="gallery-sub">The South Trail Tribute Graphic</span>
+                        </div>
+                    </figcaption>
+                </figure>
+
+                <!-- Item 16: USTP Budget Shrink Analysis (Design) -->
+                <figure class="gallery-item fade-up span-4 ar-portrait" data-category="design" data-title="USTP Budget Analysis Infographic" data-cat="Design &middot; Infographic">
+                    <div class="gallery-thumb">
+                        <img src="assets/images/creative/design/USTPS BUDGET.png" alt="USTP Budget Shrink Analysis" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption class="gallery-caption">
+                        <div class="gallery-title">USTP Budget Analysis Infographic</div>
+                        <div class="gallery-meta-row">
+                            <span class="gallery-cat">Design &middot; Infographic</span>
+                            <span class="gallery-sub">Campus News Data Visualization</span>
+                        </div>
+                    </figcaption>
+                </figure>
+
+                <!-- Item 17: Stoic Wisdom: Marcus Aurelius (Design) -->
+                <figure class="gallery-item fade-up span-4 ar-portrait" data-category="design" data-title="Stoic Wisdom: Marcus Aurelius" data-cat="Design &middot; Editorial Graphic">
+                    <div class="gallery-thumb">
+                        <img src="assets/images/creative/design/marcus aurelius.png" alt="Stoic Wisdom Marcus Aurelius" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption class="gallery-caption">
+                        <div class="gallery-title">Stoic Wisdom: Marcus Aurelius</div>
+                        <div class="gallery-meta-row">
+                            <span class="gallery-cat">Design &middot; Editorial Graphic</span>
+                            <span class="gallery-sub">Motivational Series Feature</span>
+                        </div>
+                    </figcaption>
+                </figure>
+
+                <!-- Item 18: Acoustic Harmony Still Life (Art) -->
+                <figure class="gallery-item fade-up span-4 ar-square" data-category="art" data-title="Acoustic Harmony" data-cat="Art &middot; Graphite">
+                    <div class="gallery-thumb">
+                        <img src="assets/images/creative/art/573086395_871637418524022_2086798805578278922_n.jpg" alt="Acoustic Harmony Still Life Study" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption class="gallery-caption">
+                        <div class="gallery-title">Acoustic Harmony</div>
+                        <div class="gallery-meta-row">
+                            <span class="gallery-cat">Art &middot; Graphite</span>
+                            <span class="gallery-sub">Guitar &amp; Rose Composition Study</span>
+                        </div>
+                    </figcaption>
+                </figure>
+
+                <!-- Item 19: RegenSeed ₱100k Student Grant (Design) -->
+                <figure class="gallery-item fade-up span-4 ar-square" data-category="design" data-title="RegenSeed &amp;#8369;100k Student Grant" data-cat="Design &middot; Campus News">
+                    <div class="gallery-thumb">
+                        <img src="assets/images/creative/design/regenseed.png" alt="RegenSeed ₱100,000 Student Grant" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption class="gallery-caption">
+                        <div class="gallery-title">RegenSeed &#8369;100k Student Grant</div>
+                        <div class="gallery-meta-row">
+                            <span class="gallery-cat">Design &middot; Campus News</span>
+                            <span class="gallery-sub">Startup Incubator Feature Graphic</span>
+                        </div>
+                    </figcaption>
+                </figure>
+
+                <!-- Item 20: Alampat Halftone Insignia (Design) -->
+                <figure class="gallery-item fade-up span-4 ar-square" data-category="design" data-title="Alampat Halftone Insignia" data-cat="Design &middot; Visual Identity">
+                    <div class="gallery-thumb">
+                        <img src="assets/images/creative/design/alampat-web.jpg" data-fullscreen="assets/images/creative/design/alampat.png" alt="Alampat Halftone Insignia" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption class="gallery-caption">
+                        <div class="gallery-title">Alampat Halftone Insignia</div>
+                        <div class="gallery-meta-row">
+                            <span class="gallery-cat">Design &middot; Visual Identity</span>
+                            <span class="gallery-sub">Halftone "A" Logo Symbol</span>
+                        </div>
+                    </figcaption>
+                </figure>
+
+                <!-- Item 21: Puti't Pintura Workshop (Design) -->
+                <figure class="gallery-item fade-up span-4 ar-square" data-category="design" data-title="Puti't Pintura Bleach Workshop" data-cat="Design &middot; Event Poster">
+                    <div class="gallery-thumb">
+                        <img src="assets/images/creative/design/1bleach_1.png" alt="Puti't Pintura Bleach Painting Workshop" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption class="gallery-caption">
+                        <div class="gallery-title">Puti't Pintura Bleach Workshop</div>
+                        <div class="gallery-meta-row">
+                            <span class="gallery-cat">Design &middot; Event Poster</span>
+                            <span class="gallery-sub">Bleach Painting Workshop Typography</span>
+                        </div>
+                    </figcaption>
+                </figure>
+
+                <!-- Item 22: The South Trail Insignia (Design) -->
+                <figure class="gallery-item fade-up span-4 ar-square" data-category="design" data-title="The South Trail Insignia" data-cat="Design &middot; Logo">
+                    <div class="gallery-thumb">
+                        <img src="assets/images/creative/design/pfp.png" alt="The South Trail Insignia" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption class="gallery-caption">
+                        <div class="gallery-title">The South Trail Insignia</div>
+                        <div class="gallery-meta-row">
+                            <span class="gallery-cat">Design &middot; Logo</span>
+                            <span class="gallery-sub">Official Publication Nib Symbol</span>
+                        </div>
+                    </figcaption>
+                </figure>
+
+                <!-- Item 23: Alampat Traditional Motif (Design) -->
+                <figure class="gallery-item fade-up span-4 ar-square" data-category="design" data-title="Alampat Traditional Motif" data-cat="Design &middot; Visual Identity">
+                    <div class="gallery-thumb">
+                        <img src="assets/images/creative/design/2xxx.png" alt="Alampat Traditional Motif" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption class="gallery-caption">
+                        <div class="gallery-title">Alampat Traditional Motif</div>
+                        <div class="gallery-meta-row">
+                            <span class="gallery-cat">Design &middot; Visual Identity</span>
+                            <span class="gallery-sub">Indigenous Pattern Brand Emblem</span>
+                        </div>
                     </figcaption>
                 </figure>
             </div>
@@ -289,7 +663,7 @@
 
         <!-- Experience Section -->
         <section id="experience" class="experience-section grid-container section-padding">
-            <div class="section-meta fade-up">05 / EXPERIENCE</div>
+            <div class="section-meta fade-up">06 / EXPERIENCE</div>
             
             <div class="timeline">
                 <div class="timeline-item fade-up">
@@ -328,8 +702,8 @@
         </section>
 
         <!-- Achievements Section -->
-        <section class="achievements-section grid-container section-padding">
-            <div class="section-meta fade-up">06 / ACHIEVEMENTS</div>
+        <section id="achievements" class="achievements-section grid-container section-padding">
+            <div class="section-meta fade-up">07 / ACHIEVEMENTS</div>
             
             <ul class="achievement-list fade-up">
                 <li>
@@ -354,22 +728,33 @@
         </section>
 
         <!-- Resume Section -->
-        <section class="resume-section grid-container section-padding">
-            <div class="section-meta fade-up">07 / RESUME</div>
+        <section id="resume" class="resume-section grid-container section-padding">
+            <div class="section-meta fade-up">08 / RESUME</div>
             
-            <div class="resume-content fade-up">
-                <h2 class="resume-name">LANCE ANDRE FERMO</h2>
-                <div class="resume-field">INFORMATION TECHNOLOGY</div>
+            <div class="resume-card fade-up">
+                <div class="resume-info">
+                    <div class="resume-badge">
+                        <span class="badge-dot"></span>
+                        CURRICULUM VITAE &middot; 2026
+                    </div>
+                    <p class="resume-desc">
+                        A detailed breakdown of technical capabilities, system architecture, creative direction, and development experience.
+                    </p>
+                    <div class="resume-specs">
+                        <span>FORMAT: <em>PDF</em></span>
+                        <span>STATUS: <em>AVAILABLE UPON REQUEST</em></span>
+                    </div>
+                </div>
                 <div class="resume-actions">
-                    <a href="assets/documents/lance-fermo-resume.pdf" class="btn resume-btn" target="_blank">VIEW RESUME</a>
-                    <a href="assets/documents/lance-fermo-resume.pdf" class="btn resume-btn" download>DOWNLOAD PDF</a>
+                    <a href="assets/documents/lance-fermo-resume.pdf" class="btn resume-btn resume-view-btn">VIEW RESUME &nearr;</a>
+                    <a href="assets/documents/lance-fermo-resume.pdf" class="btn resume-btn resume-download-btn" download>DOWNLOAD PDF &darr;</a>
                 </div>
             </div>
         </section>
 
         <!-- Contact Section -->
         <section id="contact" class="contact-section grid-container section-padding">
-            <div class="section-meta fade-up">08 / CONTACT</div>
+            <div class="section-meta fade-up">09 / CONTACT</div>
             
             <h2 class="contact-title fade-up">
                 Let's<br>
@@ -387,21 +772,33 @@
 
     <!-- Footer -->
     <footer class="site-footer grid-container">
-        <div class="footer-name">LANCE ANDRE FERMO</div>
+        <div class="footer-name">lance.</div>
         <div class="footer-year">&copy; <span id="current-year">2026</span></div>
         </footer>
 
     <!-- Image Viewer Modal -->
+    <!-- Luxury Alert Modal (Resume Unavailable) -->
+    <div id="toast-modal" class="toast-modal hidden" aria-live="polite">
+        <div class="toast-card">
+            <button class="toast-close" id="toast-close" aria-label="Close Notification">&times;</button>
+            <div class="toast-icon">&middot; STATUS &middot;</div>
+            <h3 class="toast-title">The resume is not available right now.</h3>
+            <p class="toast-desc">The updated document is currently being finalized. Feel free to reach out directly via email for credentials and project inquiries.</p>
+            <div class="toast-action">
+                <a href="mailto:fermolance@gmail.com" class="btn toast-btn">CONTACT VIA EMAIL &nearr;</a>
+            </div>
+        </div>
+    </div>
+
     <div id="image-modal" class="image-modal hidden">
         <button class="modal-close" aria-label="Close Modal">&times;</button>
         <div class="modal-content">
             <div class="modal-image-container">
-                <div id="modal-image" class="image-placeholder modal-ph"></div>
+                <img id="modal-img" src="" alt="Fullscreen View" class="modal-img">
             </div>
             <div class="modal-metadata">
-                <div class="modal-counter">01 / 24</div>
-                <div id="modal-title" class="modal-title">TITLE</div>
-                <div id="modal-cat" class="modal-cat">CATEGORY</div>
+                <div id="modal-title" class="modal-title"></div>
+                <div id="modal-cat" class="modal-cat"></div>
             </div>
         </div>
     </div>
@@ -409,6 +806,7 @@
     <script src="js/script.js"></script>
 </body>
 </html>
+
 
 
 

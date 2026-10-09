@@ -1,26 +1,44 @@
 // script.js — Luxury Portfolio
 
+// Automatically reset scroll position to top whenever page loads or reloads
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+
+window.addEventListener('beforeunload', () => {
+    window.scrollTo(0, 0);
+});
+
 document.addEventListener('DOMContentLoaded', () => {
+    window.scrollTo(0, 0);
 
     // 0. Intro Preloader
     const introScreen = document.getElementById('intro-screen');
     
-    
     if (introScreen) {
+        // Keep page locked at top while intro fade-in effect is running
+        const pinToTop = () => window.scrollTo(0, 0);
+        window.addEventListener('scroll', pinToTop, { passive: true });
+        pinToTop();
+
         setTimeout(() => {
+            window.removeEventListener('scroll', pinToTop);
+            window.scrollTo(0, 0);
             introScreen.classList.add('hidden');
             setTimeout(() => {
+                window.scrollTo(0, 0);
                 const heroTitleRight = document.querySelector('.hero-fade-right');
                 if (heroTitleRight) heroTitleRight.classList.add('visible');
             }, 1000);
         }, 3400); // 3.4 seconds to let the staggered animations finish and hold
     } else {
+        window.scrollTo(0, 0);
         setTimeout(() => {
             const heroTitleRight = document.querySelector('.hero-fade-right');
             if (heroTitleRight) heroTitleRight.classList.add('visible');
         }, 1000);
     }
-
     // 1. Current Year
     const yearEl = document.getElementById('current-year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -85,20 +103,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks   = document.querySelector('.nav-links');
 
     if (menuToggle && navLinks) {
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('mobile-open');
-            menuToggle.textContent = navLinks.classList.contains('mobile-open') ? 'CLOSE' : 'MENU';
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = navLinks.classList.toggle('mobile-open');
+            menuToggle.textContent = isOpen ? 'CLOSE' : 'MENU';
+            document.body.style.overflow = isOpen ? 'hidden' : '';
         });
 
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('mobile-open');
                 menuToggle.textContent = 'MENU';
+                document.body.style.overflow = '';
             });
         });
-    }
 
-    
+        navLinks.addEventListener('click', (e) => {
+            if (e.target === navLinks) {
+                navLinks.classList.remove('mobile-open');
+                menuToggle.textContent = 'MENU';
+                document.body.style.overflow = '';
+            }
+        });
+    }
 
     // 6. Gallery Filters
     const filterBtns  = document.querySelectorAll('.filter-btn');
@@ -109,39 +136,91 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.addEventListener('click', () => {
                 filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                const val = btn.getAttribute('data-filter');
+                const val = (btn.getAttribute('data-filter') || 'all').toLowerCase();
                 galleryItems.forEach(item => {
-                    const show = val === 'all' || item.getAttribute('data-category') === val;
+                    const catAttr = (item.getAttribute('data-category') || '').toLowerCase();
+                    const categories = catAttr.split(/\s+/);
+                    const show = val === 'all' || categories.includes(val) || catAttr === val;
                     item.style.display = show ? '' : 'none';
                 });
             });
         });
     }
 
-    // 7. Image Modal
+    // 7. Image Modal (Fullscreen Viewer)
     const modal       = document.getElementById('image-modal');
     const modalClose  = document.querySelector('.modal-close');
+    const modalImg    = document.getElementById('modal-img');
     const modalTitle  = document.getElementById('modal-title');
     const modalCat    = document.getElementById('modal-cat');
-    const galleryImgs = document.querySelectorAll('.gallery-img');
 
-    if (modal && modalClose && galleryImgs.length) {
-        galleryImgs.forEach(img => {
-            img.addEventListener('click', e => {
-                if (modalTitle) modalTitle.textContent = e.target.getAttribute('data-title') || '';
-                if (modalCat)   modalCat.textContent   = e.target.getAttribute('data-cat')   || '';
-                modal.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
+    function openModal(imgSrc, title, cat) {
+        if (!modal) return;
+        if (modalImg && imgSrc) {
+            modalImg.src = imgSrc;
+        }
+        if (modalTitle) modalTitle.textContent = title || '';
+        if (modalCat)   modalCat.textContent   = cat || '';
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        if (!modal) return;
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+        if (modalImg) modalImg.src = '';
+    }
+
+    if (modal && modalClose) {
+        // Project pictures: tap/click to open fullscreen
+        document.querySelectorAll('.project-visual img').forEach(img => {
+            img.style.cursor = 'pointer';
+            img.addEventListener('click', () => {
+                const projectItem = img.closest('.project-item');
+                const title = projectItem ? (projectItem.querySelector('.project-title')?.textContent.trim() || '') : '';
+                const cat   = projectItem ? (projectItem.querySelector('.project-category')?.textContent.trim() || '') : '';
+                openModal(img.src, title, cat);
             });
         });
 
-        const closeModal = () => {
-            modal.classList.add('hidden');
-            };
+        // Press article thumbnails: tap/click to open fullscreen
+        document.querySelectorAll('.press-img').forEach(img => {
+            img.style.cursor = 'pointer';
+            img.addEventListener('click', () => {
+                const card = img.closest('.press-card');
+                const title = card ? (card.querySelector('.press-headline')?.textContent.trim() || '') : '';
+                const cat   = card ? (card.querySelector('.press-source')?.textContent.trim() || '') : '';
+                openModal(img.src, title, cat);
+            });
+        });
 
-        modalClose.addEventListener('click', closeModal);
-        modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+        // Gallery items: tap/click to open fullscreen
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const img = item.querySelector('img');
+                if (!img) return;
+                const src = img.getAttribute('data-fullscreen') || img.currentSrc || img.src;
+                const title = item.getAttribute('data-title') || img.getAttribute('data-title') || item.querySelector('.gallery-title')?.textContent.trim() || '';
+                const cat   = item.getAttribute('data-cat') || img.getAttribute('data-cat') || item.querySelector('.gallery-cat')?.textContent.trim() || '';
+                openModal(src, title, cat);
+            });
+        });
+
+        modalClose.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeModal();
+        });
+
+        modal.addEventListener('click', e => {
+            if (e.target === modal || e.target.classList.contains('modal-image-container') || e.target.classList.contains('modal-content')) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeModal();
+        });
     }
 
     // 8. Scroll Fade-Up Animations
@@ -172,13 +251,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const keyMap = {
             '0': '#hero',
             '1': '#about',
-            '2': '#skills',
-            '3': '#work',
-            '4': '#creative',
-            '5': '#experience',
-            '6': '.achievements-section',
-            '7': '.resume-section',
-            '8': '#contact'
+            '2': '#press',
+            '3': '#skills',
+            '4': '#work',
+            '5': '#creative',
+            '6': '#experience',
+            '7': '#achievements',
+            '8': '#resume',
+            '9': '#contact'
         };
 
         const targetSelector = keyMap[e.key];
@@ -189,6 +269,68 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
+
+    // 10. Resume Availability Check & Luxury Popup
+    const resumeBtns = document.querySelectorAll('.resume-btn');
+    const toastModal = document.getElementById('toast-modal');
+    const toastClose = document.getElementById('toast-close');
+
+    function showResumeUnavailable() {
+        if (toastModal) {
+            toastModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    function closeToast() {
+        if (toastModal) {
+            toastModal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+    }
+
+    if (toastClose) {
+        toastClose.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeToast();
+        });
+    }
+
+    if (toastModal) {
+        toastModal.addEventListener('click', (e) => {
+            if (e.target === toastModal) closeToast();
+        });
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && toastModal && !toastModal.classList.contains('hidden')) {
+            closeToast();
+        }
+    });
+
+    if (resumeBtns.length) {
+        resumeBtns.forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                const href = btn.getAttribute('href');
+                if (!href || href === '#' || href.trim() === '') {
+                    e.preventDefault();
+                    showResumeUnavailable();
+                    return;
+                }
+
+                try {
+                    const response = await fetch(href, { method: 'HEAD' });
+                    if (!response.ok) {
+                        e.preventDefault();
+                        showResumeUnavailable();
+                    }
+                } catch (err) {
+                    e.preventDefault();
+                    showResumeUnavailable();
+                }
+            });
+        });
+    }
 });
 
 

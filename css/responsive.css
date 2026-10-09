@@ -1,14 +1,18 @@
-/* responsive.css — Luxury Portfolio */
+/* responsive.css â€” Luxury Portfolio */
 
 /* ============================================================
-   TABLET — <= 1024px
+   TABLET â€” <= 1024px
    ============================================================ */
 @media (max-width: 1024px) {
 
     :root { --page-margin: 4vw; }
 
     /* Nav */
-    .nav-links { gap: 1.5rem; }
+    .nav-links { gap: 0.85rem; }
+    .nav-links li a {
+        font-size: 0.52rem;
+        letter-spacing: 0.12em;
+    }
 
     /* Hero */
     .hero-image { left: 0; }
@@ -23,6 +27,9 @@
     .about-statement { grid-column: 1 / 8; }
     .about-text { grid-column: 8 / 13; }
 
+    /* Press Grid Tablet */
+    .press-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+
     /* Skills */
     .skills-wrapper { gap: 3rem; }
     .skills-grid { grid-template-columns: 1fr; }
@@ -36,14 +43,22 @@
     .project-layout-b .project-visual  { grid-column: 7 / 13; }
 
     /* Timeline */
-    .timeline-item { grid-template-columns: 130px 1fr 1fr; }
+    .timeline-item { 
+        grid-template-columns: 130px 1fr 1fr; 
+        padding: 2.75rem 1.75rem;
+    }
     .timeline-desc { grid-column: 2 / 4; margin-top: 0.5rem; }
 
     /* Achievements */
-    .achievement-list li { grid-template-columns: 100px 1fr 1fr auto; }
+    .achievement-list li { 
+        grid-template-columns: 130px 1fr 1fr auto; 
+        padding: 2rem 1.75rem; 
+    }
 
     /* Resume */
-    .resume-content { flex-direction: column; align-items: flex-start; gap: 2rem; padding: 3rem; }
+    .resume-card { flex-direction: column; align-items: flex-start; gap: 2.5rem; padding: 3rem 2.5rem; }
+    .resume-actions { width: 100%; }
+    .resume-actions .btn { flex: 1; text-align: center; justify-content: center; }
 
     /* Contact */
     .contact-title { grid-column: 1 / 8; }
@@ -51,7 +66,7 @@
 }
 
 /* ============================================================
-   MOBILE — <= 768px
+   MOBILE â€” <= 768px
    ============================================================ */
 @media (max-width: 768px) {
 
@@ -66,27 +81,65 @@
     body { cursor: auto; }
 
     /* ---- Nav ---- */
-    .site-nav { padding: 1.25rem var(--page-margin); }
+    .site-nav {
+        padding: 1.25rem var(--page-margin);
+        justify-content: space-between;
+    }
     .nav-links { display: none; }
-    .mobile-menu-toggle { display: block; }
+    .mobile-menu-toggle {
+        display: block;
+        position: relative;
+        z-index: 1002;
+    }
 
     .nav-links.mobile-open {
-        display: flex;
+        display: flex !important;
         flex-direction: column;
         position: fixed;
         inset: 0;
+        width: 100vw;
+        height: 100vh;
         background: rgba(10,10,10,0.98);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
         justify-content: center;
         align-items: center;
-        gap: 2.5rem;
-        z-index: 999;
+        gap: 1.15rem;
+        z-index: 1001;
+        list-style: none;
+        padding: 2.5rem 1rem;
+        margin: 0;
+        overflow-y: auto;
+    }
+
+    .nav-links.mobile-open li {
+        list-style: none;
+        text-align: center;
     }
 
     .nav-links.mobile-open li a {
-        font-size: 0.9rem;
-        letter-spacing: 0.3em;
+        font-size: 0.95rem;
+        letter-spacing: 0.2em;
+        color: var(--white);
+        padding: 0.35rem 1rem;
+        display: inline-block;
+    }
+
+    /* ---- Modal on Mobile ---- */
+    .modal-content {
+        width: 95vw;
+        max-height: 88vh;
+        gap: 0.75rem;
+    }
+    .modal-close {
+        top: 1rem;
+        right: 1rem;
+        width: 2.75rem;
+        height: 2.75rem;
+        font-size: 1.3rem;
+    }
+    .modal-img {
+        max-height: 72vh;
     }
 
     /* ---- Hero ---- */
@@ -118,6 +171,26 @@
     .about-statement,
     .about-text { width: 100%; }
 
+    /* ---- Press & Features Mobile ---- */
+    .press-section.grid-container { display: flex; flex-direction: column; gap: 2rem; }
+    .press-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+    .press-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    .press-body {
+        padding: 1.5rem 1.25rem;
+    }
+    .press-btn {
+        padding: 1.1rem 1.5rem;
+        font-size: 0.7rem;
+    }
+
     /* ---- Skills ---- */
     .skills-grid { grid-template-columns: 1fr; }
     .skill-category:nth-child(1) .skill-list { grid-template-columns: 1fr; }
@@ -134,19 +207,53 @@
     .project-layout-a .project-num,
     .project-layout-b .project-num  { display: none; }
 
-    .project-visual { order: -1; }
-    .project-visual { aspect-ratio: 16/9; }
+    .project-visual { 
+        order: -1; 
+        aspect-ratio: 16/9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--surface);
+    }
+    .project-visual img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        object-position: center;
+        margin: 0 auto;
+    }
 
     /* ---- Gallery ---- */
-    .creative-gallery { gap: 2px; }
-    .gallery-item { grid-column: span 12 !important; }
+    .creative-gallery { gap: 16px; }
+    .gallery-item {
+        grid-column: span 12 !important;
+    }
+    .gallery-caption {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+        position: relative !important;
+        background: var(--deep) !important;
+        padding: 1.15rem 1.25rem 1rem !important;
+        border-top: 1px solid var(--border) !important;
+    }
+    .gallery-item .gallery-thumb {
+        aspect-ratio: 16 / 11;
+    }
+    .gallery-item.ar-portrait .gallery-thumb {
+        aspect-ratio: 4 / 5;
+    }
+    .gallery-item.ar-square .gallery-thumb {
+        aspect-ratio: 1 / 1;
+    }
 
     /* ---- Timeline ---- */
     .timeline-item {
         display: flex;
         flex-direction: column;
         gap: 0.75rem;
-        padding: 2.5rem 0;
+        padding: 2rem 1.4rem;
     }
 
     .timeline-date { margin-bottom: 0; }
@@ -158,24 +265,61 @@
         grid-template-columns: 1fr auto;
         grid-template-rows: auto auto;
         row-gap: 0.35rem;
-        column-gap: 1rem;
-        padding: 1.5rem 0;
+        column-gap: 1.25rem;
+        padding: 1.6rem 1.4rem;
     }
-    .ach-year  { grid-column: 1 / -1; }
+    .ach-year  { 
+        grid-column: 1 / -1; 
+        margin-bottom: 0.15rem;
+    }
     .ach-event { grid-column: 1 / 2; grid-row: 2; }
     .ach-cat   { grid-column: 1 / 2; grid-row: 3; }
-    .ach-result{ grid-column: 2 / 3; grid-row: 2 / 4; align-self: center; }
+    .ach-result{ 
+        grid-column: 2 / 3; 
+        grid-row: 2 / 4; 
+        align-self: center; 
+        justify-self: end;
+        padding: 0.45rem 1.1rem;
+    }
 
     /* ---- Resume ---- */
-    .resume-content {
+    .resume-card {
         flex-direction: column;
         align-items: flex-start;
         gap: 2rem;
-        padding: 2rem;
+        padding: 2.25rem 1.5rem;
     }
 
-    .resume-actions { flex-direction: column; gap: 0.75rem; }
-    .resume-actions .btn { text-align: center; }
+    .resume-specs {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .resume-actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.85rem;
+    }
+
+    .resume-actions .btn {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+        padding: 1.1rem 1.5rem;
+        font-size: 0.7rem;
+    }
+
+    /* ---- Toast Modal on Mobile ---- */
+    .toast-card {
+        padding: 2.5rem 1.5rem 2rem;
+        width: 92vw;
+    }
+    .toast-title {
+        font-size: 1.15rem;
+    }
+    .toast-desc {
+        font-size: 0.8rem;
+    }
 
     /* ---- Contact ---- */
     .contact-section.grid-container { display: flex; flex-direction: column; gap: 3rem; }
@@ -199,13 +343,13 @@
 }
 
 /* ============================================================
-   SMALL MOBILE — <= 480px
+   SMALL MOBILE â€” <= 480px
    ============================================================ */
 @media (max-width: 480px) {
 
     :root { --page-margin: 5vw; }
 
-    .hero-title { font-size: clamp(3.5rem, 18vw, 6rem); }
+    .hero-title { font-size: clamp(3.2rem, 16vw, 5.5rem); }
     .about-statement { font-size: clamp(2rem, 9vw, 3rem); }
     .contact-title { font-size: clamp(2.5rem, 14vw, 4rem); }
 
@@ -214,10 +358,23 @@
         font-size: 0.65rem;
     }
 
-    .nav-brand { font-size: 0.75rem; }
+    .nav-brand { font-size: clamp(1.4rem, 5.5vw, 1.75rem); }
 
     .project-item { padding: 2.5rem 0; }
     .section-padding { padding-top: 4rem; padding-bottom: 4rem; }
 
     .gallery-item .image-placeholder.gallery-img { aspect-ratio: 3/2; }
+    
+    .timeline-item {
+        padding: 1.75rem 1rem;
+    }
+    
+    .achievement-list li {
+        padding: 1.35rem 1rem;
+        column-gap: 0.85rem;
+    }
+    .ach-result {
+        padding: 0.4rem 0.85rem;
+        font-size: 0.55rem;
+    }
 }
