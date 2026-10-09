@@ -98,6 +98,70 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 3b. Hero Image Scroll Dynamics & Effects
+    const heroImageImg   = document.querySelector('.hero-image img');
+    const heroImageWrap  = document.querySelector('.hero-image');
+    const heroContent    = document.querySelector('.hero-content');
+    const heroScrollLine = document.querySelector('.hero-scroll-line');
+    const heroSection    = document.getElementById('hero');
+
+    if (heroSection) {
+        let ticking = false;
+
+        function updateHeroDynamics() {
+            const scrollY = window.scrollY || window.pageYOffset;
+            const heroHeight = heroSection.offsetHeight || window.innerHeight;
+
+            // Only compute while hero is in or near viewport
+            if (scrollY <= heroHeight * 1.2) {
+                const progress = Math.min(1, Math.max(0, scrollY / (heroHeight * 0.85)));
+
+                // 1. Image Opacity & Brightness (slightly dimmer base, darkening smoothly on scroll down)
+                const opacity    = (0.78 - progress * 0.68).toFixed(3);   // 0.78 down to 0.10
+                const brightness = (0.98 - progress * 0.68).toFixed(3);   // 0.98 down to 0.30
+
+                if (heroImageImg) {
+                    heroImageImg.style.setProperty('--hero-img-opacity', opacity);
+                    heroImageImg.style.setProperty('--hero-img-brightness', brightness);
+                    // Subtle luxury parallax translation & subtle scale
+                    const imgY = (scrollY * 0.14).toFixed(1);
+                    const imgScale = (1 + progress * 0.035).toFixed(3);
+                    heroImageImg.style.transform = `translate3d(0, ${imgY}px, 0) scale(${imgScale})`;
+                }
+
+                // 2. Dynamic Dark Top Gradient (deepens on scroll down)
+                if (heroImageWrap) {
+                    const topDarkness = (0.22 + progress * 0.73).toFixed(3); // 0.22 up to 0.95
+                    heroImageWrap.style.setProperty('--hero-top-darkness', topDarkness);
+                }
+
+                // 3. Subtle Hero Content Drift & Soft Fade
+                if (heroContent) {
+                    const contentY = (-scrollY * 0.15).toFixed(1);
+                    const contentOpacity = Math.max(0, (1 - progress * 1.15)).toFixed(3);
+                    heroContent.style.transform = `translate3d(0, ${contentY}px, 0)`;
+                    heroContent.style.opacity = contentOpacity;
+                }
+
+                // 4. Fade out scroll line early
+                if (heroScrollLine) {
+                    heroScrollLine.style.opacity = Math.max(0, (1 - progress * 2.5)).toFixed(3);
+                }
+            }
+            ticking = false;
+        }
+
+        function onScroll() {
+            if (!ticking) {
+                requestAnimationFrame(updateHeroDynamics);
+                ticking = true;
+            }
+        }
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        updateHeroDynamics();
+    }
+
     // 4. Mobile Menu Toggle
     const menuToggle = document.querySelector('.mobile-menu-toggle');
     const navLinks   = document.querySelector('.nav-links');
@@ -226,17 +290,76 @@ document.addEventListener('DOMContentLoaded', () => {
     // 8. Scroll Fade-Up Animations
     const fadeElements = document.querySelectorAll('.fade-up');
     if (fadeElements.length) {
-        const observer = new IntersectionObserver(entries => {
+        const observer = new IntersectionObserver((entries, obs) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                } else {
-                    entry.target.classList.remove('visible');
+                    obs.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
 
         fadeElements.forEach(el => observer.observe(el));
+    }
+
+    // 8b. Universal Dynamic Scroll Parallax (scroll down & up on all sections)
+    const parallaxItems = document.querySelectorAll(
+        '.about-statement, .about-text, .press-card, .skill-category, .project-item, .gallery-item, .timeline-item, .achievement-list li, .resume-card, .contact-title, .section-meta'
+    );
+
+    if (parallaxItems.length) {
+        let isParallaxTicking = false;
+
+        function updateGlobalParallax() {
+            const vh = window.innerHeight;
+
+            parallaxItems.forEach(item => {
+                const rect = item.getBoundingClientRect();
+                if (rect.bottom > -100 && rect.top < vh + 100) {
+                    const itemCenter = rect.top + rect.height / 2;
+                    const screenCenter = vh / 2;
+                    const diff = (itemCenter - screenCenter) / (vh / 2);
+
+                    let speed = 14;
+                    if (item.classList.contains('about-statement') || item.classList.contains('contact-title')) {
+                        speed = 22;
+                    } else if (item.classList.contains('section-meta')) {
+                        speed = 8;
+                    } else if (item.classList.contains('press-card') || item.classList.contains('gallery-item')) {
+                        speed = 14;
+                    } else if (item.classList.contains('project-item')) {
+                        speed = 18;
+                    }
+
+                    const offsetY = (-diff * speed).toFixed(1);
+                    item.style.setProperty('--parallax-y', offsetY + 'px');
+                    if (!item.classList.contains('parallax-layer')) {
+                        item.classList.add('parallax-layer');
+                    }
+
+                    const innerImg = item.querySelector('.press-img, .gallery-thumb img, .project-visual img');
+                    if (innerImg) {
+                        const imgOffsetY = (diff * (speed * 0.7)).toFixed(1);
+                        innerImg.style.setProperty('--parallax-img-y', imgOffsetY + 'px');
+                        if (!innerImg.classList.contains('parallax-img')) {
+                            innerImg.classList.add('parallax-img');
+                        }
+                    }
+                }
+            });
+            isParallaxTicking = false;
+        }
+
+        function onParallaxScroll() {
+            if (!isParallaxTicking) {
+                requestAnimationFrame(updateGlobalParallax);
+                isParallaxTicking = true;
+            }
+        }
+
+        window.addEventListener('scroll', onParallaxScroll, { passive: true });
+        window.addEventListener('resize', onParallaxScroll, { passive: true });
+        updateGlobalParallax();
     }
 
     // 9. Keyboard Navigation
