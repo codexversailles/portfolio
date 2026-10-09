@@ -580,25 +580,6 @@ img { display: block; width: 100%; height: auto; object-fit: cover; }
     color: var(--gold);
     letter-spacing: -0.04em;
     font-weight: 600;
-    display: inline-block;
-    position: relative;
-    animation: goldGleamBreath 8s ease-in-out infinite alternate;
-}
-
-/* Subtle breathing radiance for "Andre" */
-@keyframes goldGleamBreath {
-    0% {
-        color: var(--gold);
-        text-shadow: none;
-    }
-    50% {
-        color: #ffeed0;
-        text-shadow: 0 0 20px rgba(255, 238, 208, 0.35), 0 0 35px rgba(201, 169, 110, 0.25);
-    }
-    100% {
-        color: var(--gold);
-        text-shadow: 0 0 8px rgba(201, 169, 110, 0.2);
-    }
 }
 
 .hero-side {
@@ -619,18 +600,6 @@ img { display: block; width: 100%; height: auto; object-fit: cover; }
     border-left: 1px solid var(--gold);
     padding-left: 1.25rem;
     line-height: 1.4;
-    position: relative;
-    animation: taglineBorderPulse 6s ease-in-out infinite alternate;
-}
-
-@keyframes taglineBorderPulse {
-    0% {
-        border-left-color: rgba(201, 169, 110, 0.4);
-    }
-    100% {
-        border-left-color: rgba(255, 238, 208, 0.95);
-        box-shadow: -2px 0 10px rgba(201, 169, 110, 0.25);
-    }
 }
 
 .hero-desc {
@@ -642,11 +611,6 @@ img { display: block; width: 100%; height: auto; object-fit: cover; }
     color: var(--off-white);
     line-height: 1.6;
     opacity: 0.88;
-    transition: opacity 0.5s ease;
-}
-
-.hero-desc:hover {
-    opacity: 1;
 }
 
 .hero-scroll-line {
@@ -742,6 +706,43 @@ img { display: block; width: 100%; height: auto; object-fit: cover; }
     background: var(--deep);
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+}
+
+/* About Section Portrait Background with Left Fade Black Gradient */
+.about-bg-layer {
+    position: absolute;
+    top: 0;
+    right: -4%;
+    bottom: 0;
+    width: 68%;
+    max-width: 1100px;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.about-bg-layer::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, var(--deep) 0%, rgba(13, 13, 13, 0.92) 10%, rgba(13, 13, 13, 0.28) 38%, transparent 70%),
+                linear-gradient(to bottom, var(--deep) 0%, transparent 12%, transparent 88%, var(--deep) 100%);
+    z-index: 1;
+}
+
+.about-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: right center;
+    transform: scale(1.08) translateX(25px);
+    transform-origin: right center;
+    opacity: 0.96;
+    filter: brightness(1.18) contrast(1.02);
+    will-change: transform, opacity;
+    transition: transform 0.1s ease-out;
 }
 
 .about-statement {
@@ -757,6 +758,9 @@ img { display: block; width: 100%; height: auto; object-fit: cover; }
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    z-index: 2;
+    margin-bottom: 2.5rem;
 }
 
 .about-statement em {
@@ -765,19 +769,26 @@ img { display: block; width: 100%; height: auto; object-fit: cover; }
 }
 
 .about-text {
-    grid-column: 9 / 13;
+    grid-column: 1 / 6;
+    max-width: 480px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 1.5rem;
+    position: relative;
+    z-index: 2;
 }
 
 .about-text p {
-    font-size: 0.85rem;
+    font-size: 0.88rem;
     font-weight: 300;
-    line-height: 2;
+    line-height: 1.85;
     color: var(--off-white);
-    letter-spacing: 0.03em;
+    letter-spacing: 0.015em;
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.95);
 }
 
 /* ============================================================
@@ -1714,10 +1725,48 @@ img { display: block; width: 100%; height: auto; object-fit: cover; }
 /* ============================================================
    15. CONTACT
    ============================================================ */
-.contact-section { background: var(--black); }
+.contact-section { 
+    background: var(--black); 
+    position: relative;
+    overflow: hidden;
+}
+
+/* Contact Section Painting Background with Left Fade Black Gradient */
+.contact-bg-layer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 68%;
+    max-width: 1050px;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.contact-bg-layer::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, var(--black) 0%, rgba(10, 10, 10, 0.94) 15%, rgba(10, 10, 10, 0.4) 48%, transparent 100%),
+                linear-gradient(to bottom, var(--black) 0%, transparent 20%, transparent 80%, var(--black) 100%);
+    z-index: 1;
+}
+
+.contact-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 72% center;
+    transform: translateX(-50px);
+    opacity: 0.92;
+    filter: brightness(1.10) contrast(1.06);
+    will-change: transform, opacity;
+    transition: transform 0.1s ease-out;
+}
 
 .contact-title {
-    grid-column: 1 / 9;
+    grid-column: 1 / 8;
     font-family: 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;
     font-size: clamp(3.5rem, 9vw, 8rem);
     font-weight: 400;
@@ -1729,6 +1778,10 @@ img { display: block; width: 100%; height: auto; object-fit: cover; }
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    z-index: 2;
+    transform: translateX(-15px);
+    margin-bottom: 3.5rem;
 }
 
 .contact-title em {
@@ -1738,12 +1791,15 @@ img { display: block; width: 100%; height: auto; object-fit: cover; }
 }
 
 .contact-links {
-    grid-column: 10 / 13;
+    grid-column: 1 / 7;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: flex-start;
     gap: 1.5rem;
     padding-bottom: 0.5rem;
+    position: relative;
+    z-index: 2;
+    transform: translateX(-15px);
 }
 
 .contact-link {
@@ -1752,9 +1808,10 @@ img { display: block; width: 100%; height: auto; object-fit: cover; }
     letter-spacing: 0.25em;
     text-transform: uppercase;
     color: var(--off-white);
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 1rem;
+    width: fit-content;
     transition: color 0.3s, gap 0.3s;
 }
 

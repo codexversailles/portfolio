@@ -408,6 +408,79 @@ document.addEventListener('DOMContentLoaded', () => {
         updateSectionLightUp();
     }
 
+    // 8d. About Section Dynamic Hugging & Scroll Parallax
+    const aboutSection = document.getElementById('about');
+    const aboutStatement = document.querySelector('.about-statement');
+    const aboutText = document.querySelector('.about-text');
+    const aboutBgImg = document.querySelector('.about-bg-img');
+    const contactBgImg = document.querySelector('.contact-bg-img');
+    const contactSection = document.getElementById('contact');
+
+    if (aboutSection) {
+        let isAboutTicking = false;
+
+        function updateAboutScrollHug() {
+            const vh = window.innerHeight;
+            const isWideScreen = window.innerWidth >= 900;
+            const rect = aboutSection.getBoundingClientRect();
+
+            // Only compute while About section is near/in viewport
+            if (rect.bottom > -100 && rect.top < vh + 100) {
+                // Progress: 0 when top enters bottom of viewport, 1 when section reaches top/center
+                const totalTravel = vh + rect.height;
+                const currentProgress = Math.min(1, Math.max(0, (vh - rect.top) / totalTravel));
+
+                // Both statement and description are anchored on the left
+                // Subtle organic scroll glide on the copy blocks
+                if (isWideScreen) {
+                    const glideY = ((currentProgress - 0.5) * -16).toFixed(1);
+                    if (aboutText) {
+                        aboutText.style.transform = `translate3d(0, ${glideY}px, 0)`;
+                    }
+                } else {
+                    if (aboutText) aboutText.style.transform = 'none';
+                }
+
+                // Subtle parallax depth on about background photo
+                if (aboutBgImg) {
+                    if (isWideScreen) {
+                        const bgOffset = ((currentProgress - 0.5) * 40).toFixed(1);
+                        aboutBgImg.style.transform = `scale(1.08) translate3d(25px, ${bgOffset}px, 0)`;
+                    } else {
+                        aboutBgImg.style.transform = '';
+                    }
+                }
+            }
+
+            // Contact background photo parallax
+            if (contactSection && contactBgImg) {
+                const cRect = contactSection.getBoundingClientRect();
+                if (cRect.bottom > -100 && cRect.top < vh + 100) {
+                    if (isWideScreen) {
+                        const cProgress = Math.min(1, Math.max(0, (vh - cRect.top) / (vh + cRect.height)));
+                        const cOffset = ((cProgress - 0.5) * 35).toFixed(1);
+                        contactBgImg.style.transform = `translate3d(-50px, ${cOffset}px, 0)`;
+                    } else {
+                        contactBgImg.style.transform = '';
+                    }
+                }
+            }
+
+            isAboutTicking = false;
+        }
+
+        function onAboutScroll() {
+            if (!isAboutTicking) {
+                requestAnimationFrame(updateAboutScrollHug);
+                isAboutTicking = true;
+            }
+        }
+
+        window.addEventListener('scroll', onAboutScroll, { passive: true });
+        window.addEventListener('resize', onAboutScroll, { passive: true });
+        updateAboutScrollHug();
+    }
+
     // 9. Keyboard Navigation
     document.addEventListener('keydown', (e) => {
         // Ignore if user is typing in an input (future proofing)
