@@ -636,9 +636,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 src: 'assets/music/BIA%20-%20WE%20ON%20GO%20%28Official%20Audio%29.mp3'
             },
             {
-                filename: 'Fleetwood Mac - The Chain (Official Audio).mp3',
-                title: 'Fleetwood Mac - The Chain',
-                src: 'assets/music/Fleetwood%20Mac%20-%20The%20Chain%20%28Official%20Audio%29.mp3'
+                filename: 'Drake - National Treasure.mp3',
+                title: 'Drake - National Treasure',
+                src: 'assets/music/Drake%20-%20National%20Treasure.mp3'
             }
         ];
 
