@@ -18,9 +18,18 @@
     </script>
 </head>
 <body>
-    <!-- Intro Preloader -->
+    <!-- Intro Preloader with Play Button Gate -->
     <div id="intro-screen" class="intro-screen">
-        <div class="intro-text">
+        <button id="intro-play-btn" class="intro-play-btn" aria-label="Enter site and play music" title="Click to Enter">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="36" height="36" class="intro-play-svg intro-icon-play">
+                <polygon points="7 4 20 12 7 20 7 4"/>
+            </svg>
+            <svg viewBox="0 0 24 24" fill="currentColor" width="36" height="36" class="intro-play-svg intro-icon-pause">
+                <rect x="5" y="4" width="4.5" height="16"/>
+                <rect x="14.5" y="4" width="4.5" height="16"/>
+            </svg>
+        </button>
+        <div class="intro-text" id="intro-text">
             <div class="intro-line intro-left">Lance</div>
             <div class="intro-line intro-right"><em>Andre</em></div>
             <div class="intro-line intro-left">Fermo</div>
@@ -167,6 +176,42 @@
                         <p class="press-excerpt">Securing Gold as Regional Champion in Pencil Drawing at the Mindanao Association of State Tertiary Schools (MASTS 2025) Friendship Games and Cultural Festival.</p>
                         <div class="press-card-action">
                             <a href="https://www.facebook.com/share/p/1Mf9gPtZrz/" target="_blank" rel="noopener noreferrer" class="btn press-btn">READ ARTICLE &nearr;</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article 5: From Sketches to National Recognition -->
+                <article class="press-card">
+                    <div class="press-thumb">
+                        <img src="assets/images/articles/article-alampat-national-recognition.jpg" alt="From Sketches to National Recognition - Alampat Handurawan" class="press-img">
+                    </div>
+                    <div class="press-body">
+                        <div class="press-card-meta">
+                            <span class="press-source">ALAMPAT HANDURAWAN</span>
+                            <span class="press-year">2026</span>
+                        </div>
+                        <h3 class="press-headline">From Sketches to National Recognition</h3>
+                        <p class="press-excerpt">Artist profile and feature highlighting Lance Andre Fermo's artistic journey, creative voice, and mastery of graphite and visual storytelling from USTP Claveria to national stages.</p>
+                        <div class="press-card-action">
+                            <a href="https://www.facebook.com/share/p/19UZvuhkeQ/" target="_blank" rel="noopener noreferrer" class="btn press-btn">READ ARTICLE &nearr;</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article 6: Lines of Passion, Strokes of Growth -->
+                <article class="press-card">
+                    <div class="press-thumb">
+                        <img src="assets/images/articles/article-alampat-lines-of-passion.jpg" alt="Lines of Passion, Strokes of Growth - The Art of Moving Forward" class="press-img">
+                    </div>
+                    <div class="press-body">
+                        <div class="press-card-meta">
+                            <span class="press-source">ALAMPAT HANDURAWAN</span>
+                            <span class="press-year">2025</span>
+                        </div>
+                        <h3 class="press-headline">Lines of Passion, Strokes of Growth</h3>
+                        <p class="press-excerpt">The Art of Moving Forward: A reflective spotlight on discipline, resilience, and personal artistic evolution throughout the rigorous MASTS 2025 competition circuit.</p>
+                        <div class="press-card-action">
+                            <a href="https://www.facebook.com/share/p/1HLUEaeQM6/" target="_blank" rel="noopener noreferrer" class="btn press-btn">READ ARTICLE &nearr;</a>
                         </div>
                     </div>
                 </article>
@@ -811,6 +856,39 @@
             <div class="modal-metadata">
                 <div id="modal-title" class="modal-title"></div>
                 <div id="modal-cat" class="modal-cat"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Music Player Widget (Middle Bottom) -->
+    <div class="music-floating-widget" id="music-widget" aria-label="Background Music Player">
+        <audio id="bg-audio" preload="auto" autoplay playsinline></audio>
+        <button class="music-tab-toggle" id="music-toggle" aria-label="Toggle Music Player">
+            <span class="music-eq-bars" id="music-eq">
+                <span class="eq-bar bar-1"></span>
+                <span class="eq-bar bar-2"></span>
+                <span class="eq-bar bar-3"></span>
+                <span class="eq-bar bar-4"></span>
+            </span>
+            <span class="music-tab-info">
+                <span class="music-tab-label">AUDIO</span>
+                <span class="music-tab-track" id="music-track-title">Loading track...</span>
+            </span>
+            <span class="music-state-icon" id="music-state-icon" title="Play / Pause">
+                <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+                <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><rect x="5" y="4" width="4" height="16"/><rect x="15" y="4" width="4" height="16"/></svg>
+            </span>
+        </button>
+        <div class="music-controls-row" id="music-controls-row">
+            <button class="music-ctrl-btn" id="music-prev" aria-label="Previous Track" title="Previous Track">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><polygon points="19 20 9 12 19 4 19 20"/><rect x="5" y="4" width="3" height="16"/></svg>
+            </button>
+            <button class="music-ctrl-btn" id="music-next" aria-label="Next Track" title="Next Track">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><polygon points="5 4 15 12 5 20 5 4"/><rect x="16" y="4" width="3" height="16"/></svg>
+            </button>
+            <div class="music-volume-wrap" title="Volume">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12" class="music-vol-icon"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+                <input type="range" id="music-volume" min="0" max="1" step="0.05" value="0.7" aria-label="Music Volume">
             </div>
         </div>
     </div>

@@ -13,25 +13,67 @@ window.addEventListener('beforeunload', () => {
 document.addEventListener('DOMContentLoaded', () => {
     window.scrollTo(0, 0);
 
-    // 0. Intro Preloader
-    const introScreen = document.getElementById('intro-screen');
+    // 0. Intro Preloader & Play Gate
+    const introScreen  = document.getElementById('intro-screen');
+    const introPlayBtn = document.getElementById('intro-play-btn');
+    const introText    = document.getElementById('intro-text');
     
+    // Global hook for audio start on user cue
+    window.startPortfolioAudio = null;
+
     if (introScreen) {
-        // Keep page locked at top while intro fade-in effect is running
+        // Keep page locked at top while waiting for user and during animation
         const pinToTop = () => window.scrollTo(0, 0);
         window.addEventListener('scroll', pinToTop, { passive: true });
         pinToTop();
 
-        setTimeout(() => {
-            window.removeEventListener('scroll', pinToTop);
-            window.scrollTo(0, 0);
-            introScreen.classList.add('hidden');
+        const triggerEnter = () => {
+            // 1. Immediately play audio via user click cue
+            if (typeof window.startPortfolioAudio === 'function') {
+                window.startPortfolioAudio();
+            }
+
+            // 2. Change play icon to pause icon
+            if (introPlayBtn) {
+                introPlayBtn.classList.add('is-paused-state');
+            }
+
+            // 3. Keep pause icon briefly visible, then fade out into 0.5s black screen
             setTimeout(() => {
-                window.scrollTo(0, 0);
-                const heroTitleRight = document.querySelector('.hero-fade-right');
-                if (heroTitleRight) heroTitleRight.classList.add('visible');
-            }, 1000);
-        }, 3900); // 3.9 seconds (0.5s initial black screen + 3.4s staggered animation and hold)
+                if (introPlayBtn) {
+                    introPlayBtn.classList.add('fade-out');
+                }
+
+                // 4. Exactly 0.5s of pure black screen before the moving text starts
+                setTimeout(() => {
+                    if (introText) {
+                        introText.classList.add('animating');
+                    }
+
+                    // 5. Fade out preloader screen after animation completes (3.4s)
+                    setTimeout(() => {
+                        window.removeEventListener('scroll', pinToTop);
+                        window.scrollTo(0, 0);
+                        introScreen.classList.add('hidden');
+                        setTimeout(() => {
+                            window.scrollTo(0, 0);
+                            const heroTitleRight = document.querySelector('.hero-fade-right');
+                            if (heroTitleRight) heroTitleRight.classList.add('visible');
+                        }, 1000);
+                    }, 3400);
+                }, 500); // 0.5 seconds black screen
+            }, 300); // Brief feedback showing the pause icon
+        };
+
+        if (introPlayBtn) {
+            introPlayBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                triggerEnter();
+            }, { once: true });
+        } else {
+            // Fallback if button is missing
+            triggerEnter();
+        }
     } else {
         window.scrollTo(0, 0);
         setTimeout(() => {
@@ -572,6 +614,158 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
+    }
+
+    // ============================================================
+    // 17. Floating Background Music Player
+    // ============================================================
+    const musicWidget   = document.getElementById('music-widget');
+    const bgAudio       = document.getElementById('bg-audio');
+    const musicToggle   = document.getElementById('music-toggle');
+    const trackTitleEl  = document.getElementById('music-track-title');
+    const prevBtn       = document.getElementById('music-prev');
+    const nextBtn       = document.getElementById('music-next');
+    const volumeSlider  = document.getElementById('music-volume');
+
+    if (musicWidget && bgAudio && musicToggle) {
+        // Fallback tracks in case get_music.php is run in pure static environment
+        const defaultTracks = [
+            {
+                filename: 'BIA - WE ON GO (Official Audio).mp3',
+                title: 'BIA - WE ON GO',
+                src: 'assets/music/BIA%20-%20WE%20ON%20GO%20%28Official%20Audio%29.mp3'
+            },
+            {
+                filename: 'Fleetwood Mac - The Chain (Official Audio).mp3',
+                title: 'Fleetwood Mac - The Chain',
+                src: 'assets/music/Fleetwood%20Mac%20-%20The%20Chain%20%28Official%20Audio%29.mp3'
+            }
+        ];
+
+        let playlist = [...defaultTracks];
+        let currentIndex = -1;
+        let isUserPaused = false;
+        let hasInteracted = false;
+
+        // Synchronously pick and load a random track ready to play immediately upon user click
+        currentIndex = Math.floor(Math.random() * playlist.length);
+        loadTrack(currentIndex, false);
+
+        // Expose startPortfolioAudio to the intro preloader play button
+        window.startPortfolioAudio = function() {
+            hasInteracted = true;
+            playAudio();
+        };
+
+        // Fetch any updated/new tracks in background from server folder
+        fetch('get_music.php')
+            .then(res => res.json())
+            .then(data => {
+                if (Array.isArray(data) && data.length > 0) {
+                    playlist = data;
+                }
+            })
+            .catch(() => {});
+
+        function loadTrack(index, shouldPlay = true) {
+            if (!playlist.length) return;
+            const track = playlist[index];
+            bgAudio.src = track.src;
+            bgAudio.volume = volumeSlider ? parseFloat(volumeSlider.value) : 0.7;
+            if (trackTitleEl) {
+                trackTitleEl.textContent = track.title;
+                trackTitleEl.setAttribute('title', track.title);
+            }
+            if (shouldPlay) {
+                playAudio();
+            }
+        }
+
+        function playAudio() {
+            const playPromise = bgAudio.play();
+            if (playPromise !== undefined) {
+                playPromise
+                    .then(() => {
+                        musicWidget.classList.add('is-playing');
+                        isUserPaused = false;
+                    })
+                    .catch((err) => {
+                        console.log('Audio playback waiting for gesture:', err);
+                        musicWidget.classList.remove('is-playing');
+                    });
+            }
+        }
+
+        function pauseAudio() {
+            bgAudio.pause();
+            musicWidget.classList.remove('is-playing');
+            isUserPaused = true;
+        }
+
+        function togglePlayPause() {
+            hasInteracted = true;
+            if (bgAudio.paused) {
+                playAudio();
+            } else {
+                pauseAudio();
+            }
+        }
+
+        function nextTrack() {
+            if (!playlist.length) return;
+            currentIndex = (currentIndex + 1) % playlist.length;
+            loadTrack(currentIndex, true);
+        }
+
+        function prevTrack() {
+            if (!playlist.length) return;
+            currentIndex = (currentIndex - 1 + playlist.length) % playlist.length;
+            loadTrack(currentIndex, true);
+        }
+
+        // Toggle button click (play/pause)
+        musicToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            togglePlayPause();
+        });
+
+        // Controls
+        if (nextBtn) {
+            nextBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                nextTrack();
+            });
+        }
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                prevTrack();
+            });
+        }
+
+        // Auto next track when current ends
+        bgAudio.addEventListener('ended', () => {
+            nextTrack();
+        });
+
+        // Audio state listeners
+        bgAudio.addEventListener('play', () => {
+            musicWidget.classList.add('is-playing');
+        });
+        bgAudio.addEventListener('pause', () => {
+            musicWidget.classList.remove('is-playing');
+        });
+
+        // Volume control
+        if (volumeSlider) {
+            volumeSlider.addEventListener('input', (e) => {
+                bgAudio.volume = parseFloat(e.target.value);
+            });
+            volumeSlider.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        }
     }
 });
 
