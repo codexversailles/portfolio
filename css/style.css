@@ -256,11 +256,150 @@ img { display: block; width: 100%; height: auto; object-fit: cover; }
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     text-decoration: none;
-    transition: color 0.3s ease;
+    display: inline-flex;
+    align-items: baseline;
+    position: relative;
 }
 
-.nav-brand:hover {
+.brand-char {
+    display: inline-block;
+    transition: color 0.4s ease, transform 0.4s ease, -webkit-text-stroke 0.4s ease, text-shadow 0.4s ease;
+    will-change: transform, color, -webkit-text-stroke;
+}
+
+/* Staggered occasional letter animations: subtle wave drift & outline conversion */
+/* Phase 1: Subtle letter float & wave (around every 16s) */
+.char-l   { animation: charWaveL 16s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+.char-a   { animation: charWaveA 16s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+.char-n   { animation: charWaveN 16s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+.char-c   { animation: charWaveC 16s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+.char-e   { animation: charWaveE 16s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+.char-dot { animation: charPulseDot 16s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+
+/* Letter L: Floats upward slightly */
+@keyframes charWaveL {
+    0%, 72%, 100% {
+        transform: translateY(0);
+        color: var(--white);
+        -webkit-text-stroke: 0 transparent;
+    }
+    76% {
+        transform: translateY(-2px);
+        color: var(--white);
+    }
+    80% {
+        transform: translateY(0);
+        /* Subtle outline phase */
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.85);
+    }
+    84% {
+        transform: translateY(0);
+        color: var(--white);
+        -webkit-text-stroke: 0 transparent;
+    }
+}
+
+/* Letter A: Shifts into golden outline */
+@keyframes charWaveA {
+    0%, 74%, 100% {
+        transform: translateY(0);
+        color: var(--white);
+        -webkit-text-stroke: 0 transparent;
+    }
+    78% {
+        transform: translateY(-2.2px);
+    }
+    82% {
+        transform: translateY(0);
+        color: transparent;
+        -webkit-text-stroke: 1px var(--gold);
+        text-shadow: 0 0 10px rgba(201, 169, 110, 0.4);
+    }
+    86% {
+        color: var(--white);
+        -webkit-text-stroke: 0 transparent;
+        text-shadow: none;
+    }
+}
+
+/* Letter N: Micro-tilt & float */
+@keyframes charWaveN {
+    0%, 76%, 100% {
+        transform: translateY(0) rotate(0deg);
+        color: var(--white);
+    }
+    80% {
+        transform: translateY(-2px) rotate(-1.5deg);
+    }
+    84% {
+        transform: translateY(0) rotate(0deg);
+    }
+}
+
+/* Letter C: Outline transition */
+@keyframes charWaveC {
+    0%, 78%, 100% {
+        transform: translateY(0);
+        color: var(--white);
+        -webkit-text-stroke: 0 transparent;
+    }
+    82% {
+        transform: translateY(-2.2px);
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.85);
+    }
+    86% {
+        transform: translateY(0);
+        color: var(--white);
+        -webkit-text-stroke: 0 transparent;
+    }
+}
+
+/* Letter E: Subtle settling wave */
+@keyframes charWaveE {
+    0%, 80%, 100% {
+        transform: translateY(0);
+        color: var(--white);
+    }
+    84% {
+        transform: translateY(-1.8px);
+    }
+    88% {
+        transform: translateY(0);
+    }
+}
+
+/* Dot: Golden beacon gleam & scale */
+@keyframes charPulseDot {
+    0%, 72%, 100% {
+        transform: scale(1);
+        color: var(--white);
+        text-shadow: none;
+    }
+    84% {
+        transform: scale(1.35) translateY(-1px);
+        color: var(--gold);
+        text-shadow: 0 0 12px var(--gold), 0 0 20px rgba(201, 169, 110, 0.6);
+    }
+    90% {
+        transform: scale(1);
+        color: var(--white);
+        text-shadow: none;
+    }
+}
+
+/* On hover: interactive outline morph with golden dot */
+.nav-brand:hover .brand-char {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--gold);
+}
+
+.nav-brand:hover .char-dot {
     color: var(--gold);
+    -webkit-text-stroke: 0 transparent;
+    text-shadow: 0 0 12px var(--gold);
+    transform: scale(1.25);
 }
 
 .nav-links {
@@ -351,6 +490,12 @@ img { display: block; width: 100%; height: auto; object-fit: cover; }
         rgba(10,10,10,0) 40%,
         rgba(10,10,10,0.8) 100%
     );
+    animation: heroAtmosphereBreath 12s ease-in-out infinite alternate;
+}
+
+@keyframes heroAtmosphereBreath {
+    0% { opacity: 0.85; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.02); }
 }
 
 .hero-image {
@@ -435,6 +580,25 @@ img { display: block; width: 100%; height: auto; object-fit: cover; }
     color: var(--gold);
     letter-spacing: -0.04em;
     font-weight: 600;
+    display: inline-block;
+    position: relative;
+    animation: goldGleamBreath 8s ease-in-out infinite alternate;
+}
+
+/* Subtle breathing radiance for "Andre" */
+@keyframes goldGleamBreath {
+    0% {
+        color: var(--gold);
+        text-shadow: none;
+    }
+    50% {
+        color: #ffeed0;
+        text-shadow: 0 0 20px rgba(255, 238, 208, 0.35), 0 0 35px rgba(201, 169, 110, 0.25);
+    }
+    100% {
+        color: var(--gold);
+        text-shadow: 0 0 8px rgba(201, 169, 110, 0.2);
+    }
 }
 
 .hero-side {
@@ -455,6 +619,18 @@ img { display: block; width: 100%; height: auto; object-fit: cover; }
     border-left: 1px solid var(--gold);
     padding-left: 1.25rem;
     line-height: 1.4;
+    position: relative;
+    animation: taglineBorderPulse 6s ease-in-out infinite alternate;
+}
+
+@keyframes taglineBorderPulse {
+    0% {
+        border-left-color: rgba(201, 169, 110, 0.4);
+    }
+    100% {
+        border-left-color: rgba(255, 238, 208, 0.95);
+        box-shadow: -2px 0 10px rgba(201, 169, 110, 0.25);
+    }
 }
 
 .hero-desc {
@@ -465,6 +641,12 @@ img { display: block; width: 100%; height: auto; object-fit: cover; }
     text-transform: uppercase;
     color: var(--off-white);
     line-height: 1.6;
+    opacity: 0.88;
+    transition: opacity 0.5s ease;
+}
+
+.hero-desc:hover {
+    opacity: 1;
 }
 
 .hero-scroll-line {
@@ -514,11 +696,13 @@ img { display: block; width: 100%; height: auto; object-fit: cover; }
     font-weight: 500;
     letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: rgba(201, 169, 110, 0.45);
     margin-bottom: 4rem;
     display: flex;
     align-items: center;
     gap: 1.5rem;
+    transition: color 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                text-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .section-meta::after {
@@ -526,6 +710,29 @@ img { display: block; width: 100%; height: auto; object-fit: cover; }
     flex: 1;
     height: 1px;
     background: var(--border);
+    transition: background 0.5s ease, box-shadow 0.5s ease;
+}
+
+/* Lit-Up State when section is in active view (soft, elegant glow) */
+.section-meta.lit-up {
+    color: #e5c98e;
+    text-shadow: 0 0 8px rgba(229, 201, 142, 0.35);
+}
+
+.section-meta.lit-up::after {
+    background: linear-gradient(to right, rgba(229, 201, 142, 0.5), var(--border) 60%);
+    box-shadow: 0 0 5px rgba(201, 169, 110, 0.15);
+}
+
+/* Section Main Titles Ambient Glow on scroll (soft and refined) */
+.about-statement,
+.press-title,
+.contact-title {
+    transition: text-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1), color 0.6s ease;
+}
+
+.section-active-title {
+    text-shadow: 0 0 16px rgba(255, 255, 255, 0.12), 0 0 24px rgba(201, 169, 110, 0.18);
 }
 
 /* ============================================================
@@ -1843,9 +2050,9 @@ img { display: block; width: 100%; height: auto; object-fit: cover; }
     animation: slideRightIn 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.intro-line:nth-child(1) { animation-delay: 0.2s; }
-.intro-line:nth-child(2) { animation-delay: 0.6s; }
-.intro-line:nth-child(3) { animation-delay: 1.0s; }
+.intro-line:nth-child(1) { animation-delay: 0.7s; }
+.intro-line:nth-child(2) { animation-delay: 1.1s; }
+.intro-line:nth-child(3) { animation-delay: 1.5s; }
 
 @keyframes slideLeftIn {
     0% { opacity: 0; transform: translateX(80px); }

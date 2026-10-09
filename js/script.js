@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const heroTitleRight = document.querySelector('.hero-fade-right');
                 if (heroTitleRight) heroTitleRight.classList.add('visible');
             }, 1000);
-        }, 3400); // 3.4 seconds to let the staggered animations finish and hold
+        }, 3900); // 3.9 seconds (0.5s initial black screen + 3.4s staggered animation and hold)
     } else {
         window.scrollTo(0, 0);
         setTimeout(() => {
@@ -360,6 +360,52 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('scroll', onParallaxScroll, { passive: true });
         window.addEventListener('resize', onParallaxScroll, { passive: true });
         updateGlobalParallax();
+    }
+
+    // 8c. Section Title Light-Up on Scroll
+    const allSections = document.querySelectorAll('section[id]');
+    if (allSections.length) {
+        let isLightUpTicking = false;
+
+        function updateSectionLightUp() {
+            const vh = window.innerHeight;
+            const focalPoint = vh * 0.42; // Focal center where reading occurs
+
+            allSections.forEach(sec => {
+                const rect = sec.getBoundingClientRect();
+                const meta = sec.querySelector('.section-meta');
+                const title = sec.querySelector('.about-statement, .press-title, .contact-title');
+                // Check if this section is currently active around focal point
+                const isActive = (rect.top <= vh * 0.65 && rect.bottom >= vh * 0.2);
+
+                if (meta) {
+                    if (isActive) {
+                        meta.classList.add('lit-up');
+                    } else {
+                        meta.classList.remove('lit-up');
+                    }
+                }
+
+                if (title) {
+                    if (isActive) {
+                        title.classList.add('section-active-title');
+                    } else {
+                        title.classList.remove('section-active-title');
+                    }
+                }
+            });
+            isLightUpTicking = false;
+        }
+
+        function onLightUpScroll() {
+            if (!isLightUpTicking) {
+                requestAnimationFrame(updateSectionLightUp);
+                isLightUpTicking = true;
+            }
+        }
+
+        window.addEventListener('scroll', onLightUpScroll, { passive: true });
+        updateSectionLightUp();
     }
 
     // 9. Keyboard Navigation
