@@ -314,7 +314,7 @@
 
     /* GitHub Activity Card Mobile */
     .gh-activity-card {
-        padding: 1.5rem 1.25rem;
+        padding: 1.5rem 1.15rem;
         gap: 1.5rem;
     }
     .gh-username {
@@ -332,6 +332,34 @@
     }
     .gh-stat-label {
         font-size: 0.5rem;
+    }
+
+    /* GitHub Contribution Dot Board Mobile Optimization */
+    .gh-graph-wrapper {
+        padding: 1.25rem 1rem;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+    }
+    .gh-graph-matrix {
+        min-width: 780px;
+        gap: 4px;
+        grid-template-rows: repeat(7, 12px);
+        grid-auto-columns: 12px;
+        padding-bottom: 0.5rem;
+    }
+    .gh-cell {
+        width: 12px;
+        height: 12px;
+        border-radius: 2.5px;
+    }
+    .gh-month-labels {
+        min-width: 780px;
+        font-size: 0.6rem;
+        padding-bottom: 0.25rem;
+    }
+    .gh-graph-legend {
+        padding-top: 0.5rem;
     }
 
     /* ---- Projects ---- */

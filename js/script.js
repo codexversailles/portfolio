@@ -98,6 +98,36 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, 1000);
     }
+
+    // Split hero wave lines into individual animated character spans
+    document.querySelectorAll('[data-wave]').forEach(el => {
+        const text = el.textContent;
+        el.innerHTML = '';
+        // Group by words so whitespace doesn't break
+        const words = text.split(' ');
+        let charIndex = 0;
+        words.forEach((word, wIdx) => {
+            const wordSpan = document.createElement('span');
+            wordSpan.className = 'hero-word';
+            for (let i = 0; i < word.length; i++) {
+                const charSpan = document.createElement('span');
+                charSpan.className = 'hero-char';
+                charSpan.textContent = word[i];
+                charSpan.style.setProperty('--char-index', charIndex);
+                wordSpan.appendChild(charSpan);
+                charIndex++;
+            }
+            el.appendChild(wordSpan);
+            if (wIdx < words.length - 1) {
+                const spaceSpan = document.createElement('span');
+                spaceSpan.className = 'hero-char-space';
+                spaceSpan.innerHTML = '&nbsp;';
+                el.appendChild(spaceSpan);
+                charIndex++;
+            }
+        });
+    });
+
     // 1. Current Year
     const yearEl = document.getElementById('current-year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -175,9 +205,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (scrollY <= heroHeight * 1.2) {
                 const progress = Math.min(1, Math.max(0, scrollY / (heroHeight * 0.85)));
 
-                // 1. Image Opacity & Brightness (slightly dimmer base, darkening smoothly on scroll down)
-                const opacity    = (0.78 - progress * 0.68).toFixed(3);   // 0.78 down to 0.10
-                const brightness = (0.98 - progress * 0.68).toFixed(3);   // 0.98 down to 0.30
+                // 1. Image Opacity & Brightness (lighter base, subtle smooth darkening on scroll)
+                const opacity    = (0.94 - progress * 0.65).toFixed(3);   // 0.94 down to 0.29
+                const brightness = (1.12 - progress * 0.60).toFixed(3);   // 1.12 down to 0.52
 
                 if (heroImageImg) {
                     heroImageImg.style.setProperty('--hero-img-opacity', opacity);
@@ -188,9 +218,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     heroImageImg.style.transform = `translate3d(0, ${imgY}px, 0) scale(${imgScale})`;
                 }
 
-                // 2. Dynamic Dark Top Gradient (deepens on scroll down)
+                // 2. Dynamic Dark Top Gradient (deepens softly on scroll down)
                 if (heroImageWrap) {
-                    const topDarkness = (0.22 + progress * 0.73).toFixed(3); // 0.22 up to 0.95
+                    const topDarkness = (0.10 + progress * 0.70).toFixed(3); // 0.10 up to 0.80
                     heroImageWrap.style.setProperty('--hero-top-darkness', topDarkness);
                 }
 

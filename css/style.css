@@ -512,7 +512,7 @@ img { display: block; width: 100%; height: auto; object-fit: cover; }
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to right, var(--black) 0%, rgba(8,8,8,0.7) 18%, transparent 45%);
+    background: linear-gradient(to right, var(--black) 0%, rgba(8,8,8,0.5) 15%, transparent 40%);
     z-index: 1;
     pointer-events: none;
 }
@@ -523,8 +523,8 @@ img { display: block; width: 100%; height: auto; object-fit: cover; }
     inset: 0;
     background: linear-gradient(
         to bottom,
-        rgba(8, 8, 8, var(--hero-top-darkness, 0.22)) 0%,
-        rgba(8, 8, 8, calc(var(--hero-top-darkness, 0.22) * 0.75)) 25%,
+        rgba(8, 8, 8, var(--hero-top-darkness, 0.10)) 0%,
+        rgba(8, 8, 8, calc(var(--hero-top-darkness, 0.10) * 0.6)) 25%,
         transparent 65%
     );
     z-index: 2;
@@ -537,8 +537,8 @@ img { display: block; width: 100%; height: auto; object-fit: cover; }
     height: 100%;
     object-fit: cover;
     object-position: right top;
-    opacity: var(--hero-img-opacity, 0.78);
-    filter: brightness(var(--hero-img-brightness, 0.98)) contrast(1.02);
+    opacity: var(--hero-img-opacity, 0.94);
+    filter: brightness(var(--hero-img-brightness, 1.12)) contrast(1.02);
     will-change: opacity, filter, transform;
     transition: opacity 0.15s ease-out, filter 0.15s ease-out;
 }
@@ -589,15 +589,16 @@ img { display: block; width: 100%; height: auto; object-fit: cover; }
     gap: 1.25rem;
     max-width: 580px;
     opacity: 0;
-    visibility: hidden;
+    transition: opacity 0.6s ease;
+    pointer-events: none;
 }
 
 .hero-fade-right.hero-subblock-active .hero-subblock {
     opacity: 1;
-    visibility: visible;
+    pointer-events: auto;
 }
 
-/* Subheading: Regular font, typing animation with outline */
+/* Subheading: Regular Helvetica Neue with letter-by-letter wave motion */
 .hero-subheading {
     font-family: 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;
     font-size: clamp(1rem, 2vw, 1.6rem);
@@ -612,67 +613,111 @@ img { display: block; width: 100%; height: auto; object-fit: cover; }
     padding-left: 1.25rem;
 }
 
-.subheading-line {
-    display: inline-block;
-    width: 0;
-    max-width: max-content;
+.subheading-line,
+.desc-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+}
+
+.hero-word {
+    display: inline-flex;
+    align-items: baseline;
     white-space: nowrap;
-    overflow: hidden;
+}
+
+.hero-char-space {
+    display: inline-block;
+    width: 0.35em;
+}
+
+/* Individual letter styling: starts hidden/outline, waves into solid text */
+.hero-char {
+    display: inline-block;
     color: transparent;
     -webkit-text-stroke: 1px var(--gold);
-    border-right: 2px solid transparent;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: color 0.3s ease, -webkit-text-stroke 0.3s ease, transform 0.3s ease;
+    will-change: transform, color, -webkit-text-stroke, opacity;
 }
 
-/* Typing line 1: Outline typing then fill (snappy fast speed) */
-.hero-fade-right.hero-subblock-active .subheading-line:nth-child(1) {
-    animation: typeOutline 0.45s steps(22, end) 0.05s forwards,
-               blinkCursor 0.25s step-end 0.05s 2,
-               outlineToFill 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+/* Wave reveal animation triggered letter-by-letter */
+.hero-fade-right.hero-subblock-active .subheading-line .hero-char {
+    animation: letterWaveIn 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    animation-delay: calc(0.1s + var(--char-index, 0) * 0.032s);
 }
 
-/* Typing line 2: Starts right after line 1 */
-.hero-fade-right.hero-subblock-active .subheading-line:nth-child(2) {
-    animation: typeOutline 0.45s steps(22, end) 0.6s forwards,
-               blinkCursor 0.25s step-end 0.6s 2,
-               outlineToFill 0.35s cubic-bezier(0.16, 1, 0.3, 1) 1.05s forwards;
+.hero-fade-right.hero-subblock-active .desc-line .hero-char {
+    animation: descLetterWaveIn 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    animation-delay: calc(0.9s + var(--char-index, 0) * 0.024s);
 }
 
-@keyframes typeOutline {
+/* Letter wave keyframe: subtle luxury float with golden outline, then settles cleanly */
+@keyframes letterWaveIn {
     0% {
-        width: 0;
-        border-right-color: var(--gold);
-    }
-    99% {
-        border-right-color: var(--gold);
-    }
-    100% {
-        width: 100%;
-        border-right-color: transparent;
-    }
-}
-
-@keyframes blinkCursor {
-    from, to { border-right-color: transparent; }
-    50% { border-right-color: var(--gold); }
-}
-
-@keyframes outlineToFill {
-    0% {
+        opacity: 0;
+        transform: translateY(3px);
         color: transparent;
         -webkit-text-stroke: 1px var(--gold);
+        text-shadow: none;
+    }
+    40% {
+        opacity: 1;
+        transform: translateY(-1.8px);
+        color: transparent;
+        -webkit-text-stroke: 1px var(--gold);
+        text-shadow: 0 0 8px rgba(201, 169, 110, 0.4);
+    }
+    75% {
+        transform: translateY(0);
+        color: rgba(255, 255, 255, 0.9);
+        -webkit-text-stroke: 0.4px var(--gold);
+        text-shadow: none;
     }
     100% {
+        opacity: 1;
+        transform: translateY(0);
         color: var(--white);
         -webkit-text-stroke: 0 transparent;
+        text-shadow: none;
     }
 }
 
-.hero-subheading:hover .subheading-line {
+@keyframes descLetterWaveIn {
+    0% {
+        opacity: 0;
+        transform: translateY(2.5px);
+        color: transparent;
+        -webkit-text-stroke: 0.8px var(--gold);
+    }
+    45% {
+        opacity: 1;
+        transform: translateY(-1.2px);
+        color: transparent;
+        -webkit-text-stroke: 0.8px var(--gold);
+        text-shadow: 0 0 6px rgba(201, 169, 110, 0.3);
+    }
+    80% {
+        transform: translateY(0);
+        color: rgba(200, 196, 188, 0.9);
+        -webkit-text-stroke: 0.2px var(--gold);
+    }
+    100% {
+        opacity: 0.85;
+        transform: translateY(0);
+        color: var(--off-white);
+        -webkit-text-stroke: 0 transparent;
+        text-shadow: none;
+    }
+}
+
+.hero-subheading:hover .hero-char {
     color: var(--gold);
     -webkit-text-stroke: 0 transparent;
 }
 
-/* Manifesto Descriptors with outline-to-fill typing */
+/* Manifesto Descriptors */
 .hero-desc {
     font-family: 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;
     font-size: 0.72rem;
@@ -685,47 +730,6 @@ img { display: block; width: 100%; height: auto; object-fit: cover; }
     padding-left: 1.25rem;
     display: flex;
     flex-direction: column;
-}
-
-.desc-line {
-    display: inline-block;
-    width: 0;
-    max-width: max-content;
-    white-space: nowrap;
-    overflow: hidden;
-    color: transparent;
-    -webkit-text-stroke: 0.8px var(--gold);
-    border-right: 1.5px solid transparent;
-}
-
-/* Fast sequenced typing for description lines */
-.hero-fade-right.hero-subblock-active .desc-line:nth-child(1) {
-    animation: typeOutline 0.35s steps(24, end) 1.25s forwards,
-               blinkCursor 0.2s step-end 1.25s 2,
-               descOutlineFill 0.3s ease 1.6s forwards;
-}
-
-.hero-fade-right.hero-subblock-active .desc-line:nth-child(2) {
-    animation: typeOutline 0.38s steps(28, end) 1.7s forwards,
-               blinkCursor 0.2s step-end 1.7s 2,
-               descOutlineFill 0.3s ease 2.1s forwards;
-}
-
-.hero-fade-right.hero-subblock-active .desc-line:nth-child(3) {
-    animation: typeOutline 0.25s steps(14, end) 2.2s forwards,
-               blinkCursor 0.2s step-end 2.2s 2,
-               descOutlineFill 0.3s ease 2.45s forwards;
-}
-
-@keyframes descOutlineFill {
-    0% {
-        color: transparent;
-        -webkit-text-stroke: 0.8px var(--gold);
-    }
-    100% {
-        color: var(--off-white);
-        -webkit-text-stroke: 0 transparent;
-    }
 }
 
 .hero-scroll-line {
@@ -1162,7 +1166,7 @@ img { display: block; width: 100%; height: auto; object-fit: cover; }
     grid-column: 1 / -1;
     display: flex;
     flex-direction: column;
-    margin-top: 5rem;
+    margin-top: 4.5rem;
     width: 100%;
 }
 
