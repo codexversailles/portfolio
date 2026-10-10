@@ -20,8 +20,7 @@
     .hero-image img { object-position: center top; }
     
     .hero-content { gap: 1rem; }
-    .hero-title-block { grid-column: 1 / 10; }
-    .hero-side { grid-column: 10 / 13; }
+    .hero-title-block { grid-column: 1 / 13; width: 100%; }
 
     /* About */
     .about-statement { grid-column: 1 / 8; }
@@ -31,9 +30,9 @@
     /* Press Grid Tablet */
     .press-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
 
-    /* Skills */
-    .skills-wrapper { gap: 3rem; }
-    .skills-grid { grid-template-columns: 1fr; }
+    /* Stack Grid Tablet */
+    .stack-grid { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+    .gh-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
 
     /* Projects */
     .project-layout-a .project-num,
@@ -297,10 +296,43 @@
         justify-content: center;
     }
 
-    /* ---- Skills ---- */
-    .skills-grid { grid-template-columns: 1fr; }
-    .skill-category:nth-child(1) .skill-list { grid-template-columns: 1fr; }
-    .skill-category:nth-child(2) .skill-list { grid-template-columns: 1fr; }
+    /* ---- Stack & Skills Mobile ---- */
+    .stack-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.85rem;
+    }
+    .stack-card {
+        padding: 1.25rem 1.1rem;
+        min-height: auto;
+    }
+    .stack-card-tag {
+        font-size: 0.58rem;
+    }
+    .stack-card-list li {
+        font-size: 0.78rem;
+    }
+
+    /* GitHub Activity Card Mobile */
+    .gh-activity-card {
+        padding: 1.5rem 1.25rem;
+        gap: 1.5rem;
+    }
+    .gh-username {
+        font-size: 1.4rem;
+    }
+    .gh-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+    .gh-stat-box {
+        padding: 1rem 0.85rem;
+    }
+    .gh-stat-num {
+        font-size: 1.5rem;
+    }
+    .gh-stat-label {
+        font-size: 0.5rem;
+    }
 
     /* ---- Projects ---- */
     .project-item {

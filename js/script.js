@@ -58,27 +58,44 @@ document.addEventListener('DOMContentLoaded', () => {
                         setTimeout(() => {
                             window.scrollTo(0, 0);
                             const heroTitleRight = document.querySelector('.hero-fade-right');
-                            if (heroTitleRight) heroTitleRight.classList.add('visible');
+                            if (heroTitleRight) {
+                                heroTitleRight.classList.add('visible');
+                                // Wait for LANCE ANDRE FERMO to finish fading in (0.75s) before typing
+                                setTimeout(() => {
+                                    heroTitleRight.classList.add('hero-subblock-active');
+                                }, 750);
+                            }
                         }, 1000);
                     }, 3400);
                 }, 500); // 0.5 seconds black screen
             }, 300); // Brief feedback showing the pause icon
         };
 
-        if (introPlayBtn) {
-            introPlayBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                triggerEnter();
-            }, { once: true });
-        } else {
-            // Fallback if button is missing
+        let hasTriggered = false;
+        const onUserTrigger = (e) => {
+            if (hasTriggered) return;
+            hasTriggered = true;
+            if (e) e.stopPropagation();
             triggerEnter();
+        };
+
+        if (introPlayBtn) {
+            introPlayBtn.addEventListener('click', onUserTrigger);
+            introPlayBtn.addEventListener('touchend', onUserTrigger);
         }
+        
+        // Also allow clicking anywhere on introScreen as a safe fallback
+        introScreen.addEventListener('click', onUserTrigger);
     } else {
         window.scrollTo(0, 0);
         setTimeout(() => {
             const heroTitleRight = document.querySelector('.hero-fade-right');
-            if (heroTitleRight) heroTitleRight.classList.add('visible');
+            if (heroTitleRight) {
+                heroTitleRight.classList.add('visible');
+                setTimeout(() => {
+                    heroTitleRight.classList.add('hero-subblock-active');
+                }, 750);
+            }
         }, 1000);
     }
     // 1. Current Year
@@ -595,25 +612,124 @@ document.addEventListener('DOMContentLoaded', () => {
     if (resumeBtns.length) {
         resumeBtns.forEach(btn => {
             btn.addEventListener('click', async (e) => {
+                e.preventDefault();
                 const href = btn.getAttribute('href');
                 if (!href || href === '#' || href.trim() === '') {
-                    e.preventDefault();
                     showResumeUnavailable();
                     return;
                 }
 
                 try {
                     const response = await fetch(href, { method: 'HEAD' });
-                    if (!response.ok) {
-                        e.preventDefault();
+                    if (response.ok) {
+                        // File actually exists, proceed to open or download
+                        if (btn.hasAttribute('download')) {
+                            const tempLink = document.createElement('a');
+                            tempLink.href = href;
+                            tempLink.setAttribute('download', '');
+                            document.body.appendChild(tempLink);
+                            tempLink.click();
+                            document.body.removeChild(tempLink);
+                        } else {
+                            window.open(href, '_blank');
+                        }
+                    } else {
                         showResumeUnavailable();
                     }
                 } catch (err) {
-                    e.preventDefault();
                     showResumeUnavailable();
                 }
             });
         });
+    }
+
+    // ============================================================
+    // 16. GitHub Activity Graph Builder & Stats Fetcher
+    // ============================================================
+    const ghMatrixEl = document.getElementById('gh-graph-matrix');
+    const ghTotalEl  = document.getElementById('gh-total-contribs');
+    const ghDaysEl   = document.getElementById('gh-days-commits');
+    const ghStreakEl = document.getElementById('gh-longest-streak');
+    const ghBusiestEl= document.getElementById('gh-busiest-day');
+
+    if (ghMatrixEl) {
+        // Fallback pre-calculated data from user's current commit log
+        function renderMatrix(contributions) {
+            ghMatrixEl.innerHTML = '';
+            const frag = document.createDocumentFragment();
+            // Up to 52-53 weeks (7 rows x 53 cols = ~371 cells)
+            contributions.forEach(item => {
+                const cell = document.createElement('div');
+                cell.className = `gh-cell lvl-${item.level || 0}`;
+                const titleText = `${item.date}: ${item.count} contribution${item.count === 1 ? '' : 's'}`;
+                cell.setAttribute('title', titleText);
+                frag.appendChild(cell);
+            });
+            ghMatrixEl.appendChild(frag);
+        }
+
+        // Generate default mock layout matching user profile commits if offline
+        function generateDefaultCells() {
+            const cells = [];
+            const today = new Date();
+            for (let i = 370; i >= 0; i--) {
+                const d = new Date(today);
+                d.setDate(d.getDate() - i);
+                const dateStr = d.toISOString().split('T')[0];
+                let count = 0;
+                let level = 0;
+
+                // Match recent activity spikes
+                if (dateStr >= '2026-10-01' && dateStr <= '2026-10-10') {
+                    if (dateStr === '2026-10-03') { count = 41; level = 4; }
+                    else if (dateStr === '2026-10-04') { count = 26; level = 4; }
+                    else if (dateStr === '2026-10-09') { count = 9; level = 4; }
+                    else if (dateStr === '2026-10-01' || dateStr === '2026-10-08') { count = 2; level = 1; }
+                    else if (dateStr === '2026-10-10') { count = 1; level = 1; }
+                }
+
+                cells.push({ date: dateStr, count, level });
+            }
+            return cells;
+        }
+
+        // Render immediately with baseline
+        renderMatrix(generateDefaultCells());
+
+        // Fetch live from GitHub Contributions API
+        fetch('https://github-contributions-api.jogruber.de/v4/codexversailles?y=last')
+            .then(res => res.json())
+            .then(data => {
+                if (data && Array.isArray(data.contributions)) {
+                    renderMatrix(data.contributions);
+
+                    let total = 0;
+                    let daysWithCommits = 0;
+                    let busiest = 0;
+                    let longestStreak = 0;
+                    let currentStreak = 0;
+
+                    data.contributions.forEach(d => {
+                        total += d.count;
+                        if (d.count > 0) {
+                            daysWithCommits++;
+                            currentStreak++;
+                            if (currentStreak > longestStreak) longestStreak = currentStreak;
+                            if (d.count > busiest) busiest = d.count;
+                        } else {
+                            currentStreak = 0;
+                        }
+                    });
+
+                    if (ghTotalEl) ghTotalEl.textContent = total;
+                    if (ghDaysEl) ghDaysEl.textContent = daysWithCommits;
+                    if (ghStreakEl) ghStreakEl.textContent = `${longestStreak} days`;
+                    if (ghBusiestEl) ghBusiestEl.textContent = busiest;
+                }
+            })
+            .catch(() => {
+                // Keep default calculated values
+            });
     }
 
     // ============================================================
