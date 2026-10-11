@@ -13,19 +13,53 @@ window.addEventListener('beforeunload', () => {
 document.addEventListener('DOMContentLoaded', () => {
     window.scrollTo(0, 0);
 
-    // 0. Intro Preloader & Play Gate
+    // 0. Intro Preloader, Circular Audio Loader & Play Gate
     const introScreen  = document.getElementById('intro-screen');
+    const introLoader  = document.getElementById('intro-loader');
     const introPlayBtn = document.getElementById('intro-play-btn');
     const introText    = document.getElementById('intro-text');
+    const spinnerProg  = document.getElementById('intro-spinner-progress');
+    const spinnerPct   = document.getElementById('intro-spinner-percent');
+    const loaderText   = document.getElementById('intro-loader-text');
     
-    // Global hook for audio start on user cue
+    // Global hooks
     window.startPortfolioAudio = null;
+    window.onAudioTracksReady = null;
 
     if (introScreen) {
         // Keep page locked at top while waiting for user and during animation
         const pinToTop = () => window.scrollTo(0, 0);
         window.addEventListener('scroll', pinToTop, { passive: true });
         pinToTop();
+
+        // Total circumference for circle r=34 is 2 * PI * 34 ~= 213.63
+        const CIRCUMFERENCE = 213.63;
+        let currentProgress = 0;
+        let loaderFinished = false;
+
+        function updateLoaderProgress(pct, statusText) {
+            currentProgress = Math.min(100, Math.max(currentProgress, Math.round(pct)));
+            const offset = CIRCUMFERENCE - (currentProgress / 100) * CIRCUMFERENCE;
+            if (spinnerProg) spinnerProg.style.strokeDashoffset = offset;
+            if (spinnerPct) spinnerPct.textContent = `${currentProgress}%`;
+            if (statusText && loaderText) loaderText.textContent = statusText;
+
+            if (currentProgress >= 100 && !loaderFinished) {
+                loaderFinished = true;
+                setTimeout(() => {
+                    // Smoothly fade out loader and reveal Play button
+                    if (introLoader) introLoader.classList.add('fade-out');
+                    setTimeout(() => {
+                        if (introPlayBtn) {
+                            introPlayBtn.classList.remove('hidden');
+                        }
+                    }, 350);
+                }, 400);
+            }
+        }
+
+        // Expose progress updater to audio subsystem
+        window.updateAudioPreloadProgress = updateLoaderProgress;
 
         const triggerEnter = () => {
             // 1. Immediately play audio via user click cue
@@ -774,17 +808,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const volumeSlider  = document.getElementById('music-volume');
 
     if (musicWidget && bgAudio && musicToggle) {
-        // Fallback tracks in case get_music.php is run in pure static environment
+        // Fallback tracks in case get_music.php is run in pure static environment (e.g. Vercel/GitHub Pages)
         const defaultTracks = [
             {
-                filename: 'BIA - WE ON GO (Official Audio).mp3',
-                title: 'BIA - WE ON GO',
-                src: 'assets/music/BIA%20-%20WE%20ON%20GO%20%28Official%20Audio%29.mp3'
+                filename: 'Sade - Cherish The Day.mp3',
+                title: 'Sade - Cherish The Day',
+                src: 'assets/music/Sade%20-%20Cherish%20The%20Day.mp3'
             },
             {
-                filename: 'Drake - National Treasure.mp3',
-                title: 'Drake - National Treasure',
-                src: 'assets/music/Drake%20-%20National%20Treasure.mp3'
+                filename: 'Sade - Is It a Crime.mp3',
+                title: 'Sade - Is It a Crime',
+                src: 'assets/music/Sade%20-%20Is%20It%20a%20Crime.mp3'
+            },
+            {
+                filename: 'Sade - No Ordinary Love.mp3',
+                title: 'Sade - No Ordinary Love',
+                src: 'assets/music/Sade%20-%20No%20Ordinary%20Love.mp3'
+            },
+            {
+                filename: 'Sade - Paradise.mp3',
+                title: 'Sade - Paradise',
+                src: 'assets/music/Sade%20-%20Paradise.mp3'
             }
         ];
 
@@ -793,25 +837,83 @@ document.addEventListener('DOMContentLoaded', () => {
         let isUserPaused = false;
         let hasInteracted = false;
 
-        // Synchronously pick and load a random track ready to play immediately upon user click
-        currentIndex = Math.floor(Math.random() * playlist.length);
-        loadTrack(currentIndex, false);
-
         // Expose startPortfolioAudio to the intro preloader play button
         window.startPortfolioAudio = function() {
             hasInteracted = true;
             playAudio();
         };
 
-        // Fetch any updated/new tracks in background from server folder
-        fetch('get_music.php')
-            .then(res => res.json())
-            .then(data => {
-                if (Array.isArray(data) && data.length > 0) {
-                    playlist = data;
+        // Prioritized Audio Preloader with Circular Progress
+        async function initAudioPreloader() {
+            const reportProgress = (pct, label) => {
+                if (typeof window.updateAudioPreloadProgress === 'function') {
+                    window.updateAudioPreloadProgress(pct, label);
                 }
-            })
-            .catch(() => {});
+            };
+
+            reportProgress(10, 'SCANNING PLAYLIST');
+
+            // 1. Fetch playlist from server or fallback
+            try {
+                const res = await fetch('get_music.php');
+                if (res.ok) {
+                    const data = await res.json();
+                    if (Array.isArray(data) && data.length > 0) {
+                        playlist = data;
+                    }
+                }
+            } catch (err) {
+                // Keep defaultTracks on static/offline
+            }
+
+            reportProgress(30, 'LOADING SOUNDSCAPE');
+
+            // 2. Select initial track (randomized)
+            currentIndex = Math.floor(Math.random() * playlist.length);
+            loadTrack(currentIndex, false);
+
+            // 3. Preload all tracks via HTMLAudioElement / XHR
+            const totalTracks = playlist.length;
+            let loadedCount = 0;
+
+            const preloadPromises = playlist.map((track, idx) => {
+                return new Promise((resolve) => {
+                    const tempAudio = new Audio();
+                    tempAudio.preload = 'auto';
+
+                    let isDone = false;
+                    const onReady = () => {
+                        if (isDone) return;
+                        isDone = true;
+                        loadedCount++;
+                        const currentPct = 30 + Math.round((loadedCount / totalTracks) * 65);
+                        reportProgress(currentPct, `LOADING TRACK ${loadedCount}/${totalTracks}`);
+                        resolve();
+                    };
+
+                    tempAudio.addEventListener('canplaythrough', onReady, { once: true });
+                    tempAudio.addEventListener('loadeddata', onReady, { once: true });
+                    tempAudio.addEventListener('error', () => {
+                        // Even if a specific file fails, don't hang the loader
+                        onReady();
+                    }, { once: true });
+
+                    tempAudio.src = track.src;
+                    tempAudio.load();
+
+                    // Timeout safety guarantee (max 2.5s per track in case of slow network)
+                    setTimeout(onReady, 2500);
+                });
+            });
+
+            await Promise.all(preloadPromises);
+
+            // 4. Complete to 100% and ready
+            reportProgress(100, 'READY');
+        }
+
+        // Launch prioritized audio preloader immediately
+        initAudioPreloader();
 
         function loadTrack(index, shouldPlay = true) {
             if (!playlist.length) return;

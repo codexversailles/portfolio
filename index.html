@@ -18,9 +18,23 @@
     </script>
 </head>
 <body>
-    <!-- Intro Preloader with Play Button Gate -->
+    <!-- Intro Preloader with Circular Loader & Play Gate -->
     <div id="intro-screen" class="intro-screen">
-        <button id="intro-play-btn" class="intro-play-btn" aria-label="Enter site and play music" title="Click to Enter">
+        <!-- Circular Audio Loader -->
+        <div id="intro-loader" class="intro-loader">
+            <div class="intro-spinner-ring">
+                <svg viewBox="0 0 80 80" class="intro-spinner-svg">
+                    <circle class="intro-spinner-bg" cx="40" cy="40" r="34"></circle>
+                    <circle class="intro-spinner-progress" id="intro-spinner-progress" cx="40" cy="40" r="34"></circle>
+                </svg>
+                <div class="intro-spinner-center">
+                    <span class="intro-spinner-percent" id="intro-spinner-percent">0%</span>
+                </div>
+            </div>
+            <span class="intro-loader-text" id="intro-loader-text">TUNING SOUNDSCAPE</span>
+        </div>
+
+        <button id="intro-play-btn" class="intro-play-btn hidden" aria-label="Enter site and play music" title="Click to Enter">
             <svg viewBox="0 0 24 24" fill="currentColor" width="36" height="36" class="intro-play-svg intro-icon-play">
                 <polygon points="7 4 20 12 7 20 7 4"/>
             </svg>
@@ -227,7 +241,8 @@
             <div class="section-meta fade-up">03 / STACK</div>
 
             <div class="skills-header fade-up">
-                <h2 class="stack-main-title">Stack</h2>
+                <h2 class="stack-main-title">Tools &amp;<br><em>Technologies.</em></h2>
+                <p class="stack-subtitle">Engineering foundations, frameworks, and specialized toolsets across software and art.</p>
             </div>
             
             <div class="stack-grid fade-up">
@@ -254,7 +269,6 @@
                         <li>Next.js</li>
                         <li>HTML5 / CSS3</li>
                         <li>Tailwind CSS</li>
-                        <li>Responsive UI</li>
                     </ul>
                 </div>
 
@@ -288,6 +302,7 @@
                         <li>MySQL</li>
                         <li>PostgreSQL</li>
                         <li>Firebase</li>
+                        <li>ObjectBox (Vector/NoSQL)</li>
                         <li>SQLite</li>
                     </ul>
                 </div>
@@ -296,9 +311,11 @@
                 <div class="stack-card">
                     <span class="stack-card-tag">AI &amp; INTEGRATIONS</span>
                     <ul class="stack-card-list">
-                        <li>Gemini API</li>
-                        <li>OpenAI API</li>
-                        <li>Claude API</li>
+                        <li>Gemini 1.5 Flash</li>
+                        <li>Local LLM (Qwen2)</li>
+                        <li>RAG &amp; Vector Embeddings</li>
+                        <li>YOLOv8 / OpenCV</li>
+                        <li>OpenAI &amp; Claude APIs</li>
                     </ul>
                 </div>
 
@@ -338,11 +355,11 @@
                 <article class="project-item project-layout-a fade-up">
                     <div class="project-num">01</div>
                     <div class="project-content">
-                        <h3 class="project-title">CLINIC MANAGEMENT SYSTEM</h3>
-                        <div class="project-category">WEB APPLICATION</div>
-                        <p class="project-desc">A comprehensive system to streamline clinic operations, managing patient records, appointments, and billing.</p>
+                        <h3 class="project-title">USTP CLINIC MANAGEMENT SYSTEM</h3>
+                        <div class="project-category">WEB APPLICATION &bull; HEALTHCARE</div>
+                        <p class="project-desc">A comprehensive system tailored for the USTP Clinic in USTP Claveria, managing student and staff patient records, consultation visits, and pharmacy inventory. Features an integrated Python backend engine powering predictive medicine demand analytics and automated multi-format report exports.</p>
                         <div class="project-tech">
-                            HTML / CSS / JavaScript / PHP / CodeIgniter 4 / MySQL
+                            PHP / CodeIgniter 4 / Python / MySQL / JavaScript / HTML5 / CSS3
                         </div>
                         <div class="project-links">
                             <a href="https://github.com/Zelrey05/clinic_inventory" class="btn" target="_blank">GITHUB &nearr;</a>
@@ -363,7 +380,7 @@
                     <div class="project-content">
                         <h3 class="project-title">PILLET CREEK</h3>
                         <div class="project-category">GAME DEVELOPMENT</div>
-                        <p class="project-desc">A 2D horror game that immerses players in a dark and suspenseful environment where survival depends on wit and strategy. Features dynamic lighting and object interaction mechanics.</p>
+                        <p class="project-desc">A 2D atmospheric horror game inspired by <em>The Screecher</em> mod for <em>Don't Starve</em>. Immerses players in an ominous environment where survival depends on wit and strategy, featuring custom dynamic lighting and tactile object interaction mechanics.</p>
                         <div class="project-tech">
                             Java / MySQL
                         </div>
@@ -415,18 +432,39 @@
                 <article class="project-item project-layout-a fade-up">
                     <div class="project-num">05</div>
                     <div class="project-content">
-                        <h3 class="project-title">USTP AI CHATBOT</h3>
-                        <div class="project-category">AI / MOBILE APP</div>
-                        <p class="project-desc">A localized, offline AI chatbot application powered by the Qwen LLM. Specifically trained on the USTP student handbook dataset to instantly assist students with university policies and information.</p>
+                        <h3 class="project-title">USTP HANDBOOK AI ASSISTANT</h3>
+                        <div class="project-category">AI / MOBILE APP &bull; DUAL ENGINE</div>
+                        <p class="project-desc">Intelligent student handbook assistant built with a dual architecture: an on-device offline RAG pipeline using Qwen2 &amp; ObjectBox vector search, alongside a cloud-connected edition powered by Google Gemini 1.5 Flash and Firebase.</p>
                         <div class="project-tech">
-                            Flutter / Dart / Python / Firebase
+                            Flutter / Dart / Google Gemini 1.5 / Qwen2 / RAG / ObjectBox / Python
                         </div>
                         <div class="project-links">
-                            <a href="https://drive.google.com/file/d/142Z6X41eeVXVzKljmalx6_keCZpL1wCj/view?usp=sharing" class="btn" target="_blank">DOWNLOAD APK &nearr;</a>
+                            <a href="https://github.com/codexversailles/ustp-handbook-local-ai" class="btn" target="_blank">LOCAL RAG REPO &nearr;</a>
+                            <a href="https://github.com/codexversailles/ustp-handbook-gemini-chatbot" class="btn" target="_blank">GEMINI REPO &nearr;</a>
+                            <a href="https://drive.google.com/file/d/142Z6X41eeVXVzKljmalx6_keCZpL1wCj/view?usp=sharing" class="btn" target="_blank">APK &nearr;</a>
                         </div>
                     </div>
                     <div class="project-visual">
                         <img src="assets/images/projects/ustp-ai-chatbot/552359907_2119432348582080_5315817040511982078_n.png" alt="USTP AI Chatbot">
+                    </div>
+                </article>
+
+                <!-- Project 06 -->
+                <article class="project-item project-layout-b fade-up">
+                    <div class="project-num">06</div>
+                    <div class="project-visual">
+                        <img src="assets/images/projects/rxflow/rxflow-preview.png" alt="RxFlow Pharmacy Management">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">RXFLOW</h3>
+                        <div class="project-category">MOBILE APPLICATION / CLINIC PROTOTYPE</div>
+                        <p class="project-desc">A cross-platform mobile prescription and pharmacy workflow management app built as the prototype foundation for the USTP Clinic Management System. Implemented real-time medicine inventory tracking, dispensing flows, and role-based security.</p>
+                        <div class="project-tech">
+                            Flutter / Dart / Firebase / Cloud Firestore / Provider
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/codexversailles/rxflow-pharmacy-management" class="btn" target="_blank">GITHUB &nearr;</a>
+                        </div>
                     </div>
                 </article>
             </div>
