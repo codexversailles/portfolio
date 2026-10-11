@@ -107,7 +107,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let hasTriggered = false;
         const onUserTrigger = (e) => {
-            if (hasTriggered) return;
+            // Strictly guard: user CANNOT trigger entry or fade-in while loading isn't finished
+            if (!loaderFinished || hasTriggered) return;
             hasTriggered = true;
             if (e) e.stopPropagation();
             triggerEnter();
@@ -117,9 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
             introPlayBtn.addEventListener('click', onUserTrigger);
             introPlayBtn.addEventListener('touchend', onUserTrigger);
         }
-        
-        // Also allow clicking anywhere on introScreen as a safe fallback
-        introScreen.addEventListener('click', onUserTrigger);
     } else {
         window.scrollTo(0, 0);
         setTimeout(() => {
