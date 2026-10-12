@@ -32,6 +32,7 @@
 
     /* Stack Grid Tablet */
     .stack-grid { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+    .capabilities-matrix { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
     .gh-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
 
     /* Projects */
@@ -42,7 +43,10 @@
     .project-layout-a .project-visual,
     .project-layout-b .project-visual  { grid-column: 7 / 13; }
 
-    /* Timeline */
+    /* Timeline & Achievements Tablet */
+    .timeline-ledger-header,
+    .ach-ledger-header { display: none; }
+
     .timeline-item { 
         grid-template-columns: 130px 1fr 1fr; 
         padding: 2.75rem 1.75rem;
@@ -287,6 +291,7 @@
         margin-top: auto;
         padding-top: 0.4rem;
     }
+    .press-action-link,
     .press-btn {
         padding: 0.55rem 0.6rem;
         font-size: 0.52rem;
@@ -295,11 +300,36 @@
         text-align: center;
         justify-content: center;
     }
+    .press-action-link .press-arrow {
+        font-size: 0.7rem;
+    }
+    .press-folio-tag {
+        font-size: 0.48rem;
+        letter-spacing: 0.15em;
+    }
 
     /* ---- Stack & Skills Mobile ---- */
     .stack-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 0.85rem;
+    }
+    .capabilities-matrix {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+    .capability-domain {
+        padding: 1.85rem 1.4rem;
+        gap: 1.25rem;
+    }
+    .domain-title {
+        font-size: 0.95rem;
+    }
+    .domain-tags {
+        gap: 0.45rem;
+    }
+    .tech-pill {
+        font-size: 0.72rem;
+        padding: 0.35rem 0.8rem;
     }
     .stack-card {
         padding: 1.25rem 1.1rem;
@@ -375,20 +405,36 @@
 
     .project-visual { 
         order: -1; 
-        aspect-ratio: 16/9;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: var(--surface);
+        width: 100%;
+        background: transparent;
     }
-    .project-visual img {
+    .project-frame {
+        width: 100%;
+        padding: 0.5rem;
+    }
+    .project-frame img {
         max-width: 100%;
-        max-height: 100%;
+        max-height: 40vh;
         width: auto;
         height: auto;
         object-fit: contain;
         object-position: center;
         margin: 0 auto;
+    }
+    .project-meta-strip {
+        flex-wrap: wrap;
+        gap: 0.6rem;
+    }
+    .project-links {
+        width: 100%;
+        display: flex;
+        gap: 0.6rem;
+    }
+    .project-action-btn {
+        flex: 1;
+        justify-content: center;
+        text-align: center;
+        padding: 0.7rem 0.9rem;
     }
 
     /* ---- Creative Works Gallery Mobile (2-Column Grid) ---- */
