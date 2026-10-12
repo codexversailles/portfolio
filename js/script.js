@@ -332,6 +332,146 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ============================================================
+    // 6b. Interactive Fanned Folders Deck (Section 03 Capabilities)
+    // ============================================================
+    const deckContainer = document.getElementById('deckContainer');
+    if (deckContainer) {
+        const FOLDERS = [
+            {
+                n: "01",
+                title: "Systems & Core Architecture",
+                sub: "Core Programming · Game Engines · Mobile Frameworks",
+                tags: ["Python", "C / C#", "Java", "Dart", "Flutter", "Kotlin", "PHP", "SQL", "Godot Engine"]
+            },
+            {
+                n: "02",
+                title: "Interface & Platforms",
+                sub: "Modern Web Systems · Full-Stack Frameworks · Cloud Backends",
+                tags: ["React", "Next.js", "JavaScript / ES6+", "HTML5 & Modern CSS", "Tailwind CSS", "CodeIgniter 4", "Laravel", "Node.js", "RESTful APIs", "MySQL", "PostgreSQL", "Firebase", "Vercel · CI/CD"]
+            },
+            {
+                n: "03",
+                title: "Applied AI & Machine Intelligence",
+                sub: "Local LLM Inference · Vector Databases · Edge Computer Vision",
+                tags: ["Qwen2 (Local LLMs)", "Google Gemini 1.5 Flash", "RAG Architecture", "ObjectBox (Vector DB)", "Vector Embeddings", "Ultralytics YOLOv8", "OpenCV Vision", "Claude & OpenAI APIs"]
+            },
+            {
+                n: "04",
+                title: "Editorial & Creative Direction",
+                sub: "Fine Arts · Visual Identity · Editorial Publishing · Cinema",
+                tags: ["Adobe Photoshop", "Adobe InDesign", "Adobe Illustrator", "Adobe Lightroom", "Canva · Affinity", "DaVinci Resolve", "CapCut", "Publication Layout & Typography", "Photojournalism", "Pencil Drawing (Graphite)", "Oil Painting", "Acrylic Painting"]
+            }
+        ];
+
+        let openFolderEl = null;
+
+        function renderFolders() {
+            deckContainer.innerHTML = FOLDERS.map((f, i) => {
+                const itemCount = String(f.tags.length).padStart(2, '0');
+                return `
+                    <article class="folder" style="--i: ${i}" data-index="${i}">
+                        <div class="folder-back" aria-hidden="true"></div>
+                        <div class="folder-paper" id="paper-${i}" role="region" aria-labelledby="front-btn-${i}">
+                            <div class="paper-header">
+                                <span class="paper-title">TECH INDEX &middot; ${itemCount} ITEMS</span>
+                                <span class="paper-indicator" aria-hidden="true"></span>
+                            </div>
+                            <ul class="tags-list">
+                                ${f.tags.map((tag, tIndex) => `
+                                    <li class="tag-item" style="--t: ${tIndex}">${tag}</li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                        <button class="folder-front" id="front-btn-${i}" aria-expanded="false" aria-controls="paper-${i}" tabindex="0">
+                            <span class="folder-num">${f.n}</span>
+                            <h3 class="folder-title">${f.title}</h3>
+                            <p class="folder-sub">${f.sub}</p>
+                            <span class="folder-cue">
+                                <span>EXPLORE</span>
+                                <span class="folder-cue-icon">&darr;</span>
+                            </span>
+                        </button>
+                    </article>
+                `;
+            }).join('');
+        }
+
+        function closeFolder() {
+            if (!openFolderEl) return;
+            openFolderEl.classList.remove('is-open');
+            const frontBtn = openFolderEl.querySelector('.folder-front');
+            if (frontBtn) frontBtn.setAttribute('aria-expanded', 'false');
+            openFolderEl = null;
+            deckContainer.classList.remove('has-open');
+        }
+
+        function openFolder(folderEl) {
+            if (!folderEl) return;
+            if (openFolderEl === folderEl) {
+                closeFolder();
+                return;
+            }
+            closeFolder();
+
+            folderEl.classList.add('is-open');
+            const frontBtn = folderEl.querySelector('.folder-front');
+            if (frontBtn) frontBtn.setAttribute('aria-expanded', 'true');
+            openFolderEl = folderEl;
+            deckContainer.classList.add('has-open');
+        }
+
+        // Delegated click handler on the deck
+        deckContainer.addEventListener('click', (e) => {
+            const folder = e.target.closest('.folder');
+            const frontBtn = e.target.closest('.folder-front');
+            if (folder && frontBtn) {
+                e.stopPropagation();
+                openFolder(folder);
+            }
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' || e.key === 'Esc') {
+                closeFolder();
+            }
+        });
+
+        // Close on click outside of any folder
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.folder')) {
+                closeFolder();
+            }
+        });
+
+        // Mouse parallax tilt on deck container (desktop only)
+        if (window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 900px)').matches &&
+            !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            const stage = deckContainer.parentElement;
+            let rafId = null;
+
+            stage.addEventListener('mousemove', (e) => {
+                cancelAnimationFrame(rafId);
+                rafId = requestAnimationFrame(() => {
+                    const rect = stage.getBoundingClientRect();
+                    const normX = (e.clientX - rect.left) / rect.width - 0.5;
+                    const normY = (e.clientY - rect.top) / rect.height - 0.5;
+                    deckContainer.style.setProperty('--ty', `${(normX * 4).toFixed(2)}deg`);
+                    deckContainer.style.setProperty('--tx', `${(-normY * 3).toFixed(2)}deg`);
+                });
+            });
+
+            stage.addEventListener('mouseleave', () => {
+                cancelAnimationFrame(rafId);
+                deckContainer.style.setProperty('--ty', '0deg');
+                deckContainer.style.setProperty('--tx', '0deg');
+            });
+        }
+
+        renderFolders();
+    }
+
     // 7. Image Modal (Fullscreen Viewer)
     const modal       = document.getElementById('image-modal');
     const modalClose  = document.querySelector('.modal-close');

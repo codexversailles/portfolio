@@ -31,8 +31,36 @@
     .press-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
 
     /* Stack Grid Tablet */
-    .stack-grid { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
-    .capabilities-matrix { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .deck-stage { perspective: none; }
+    .deck-container {
+        --rise: 280px;
+        width: 100%;
+        max-width: 820px;
+        height: auto;
+        margin: 20px auto 0;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px 24px;
+        transform: none !important;
+    }
+    .deck-container.has-open {
+        margin-top: 20px !important;
+    }
+    .folder {
+        position: relative;
+        width: 100%;
+        height: 410px;
+        bottom: auto;
+        transform: translateY(var(--enter, 0px));
+        margin-top: var(--mt, 0px);
+    }
+    .deck-container:not(.has-open) .folder:hover { --lift: 0px; }
+    .deck-container:not(.has-open) .folder:hover ~ .folder { --shift: 0px; }
+    .folder.is-open { --mt: var(--rise); }
+    .folder-paper {
+        height: 380px;
+        padding: 24px 20px 140px;
+    }
     .gh-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
 
     /* Projects */
@@ -308,38 +336,39 @@
         letter-spacing: 0.15em;
     }
 
-    /* ---- Stack & Skills Mobile ---- */
-    .stack-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.85rem;
-    }
-    .capabilities-matrix {
+    /* ---- Stack & Skills Mobile (Vertical Card Pile) ---- */
+    .deck-container {
+        --rise: 250px;
         grid-template-columns: 1fr;
-        gap: 1.25rem;
+        gap: 0;
+        max-width: 440px;
+        margin: 1.5rem auto 20px;
     }
-    .capability-domain {
-        padding: 1.85rem 1.4rem;
-        gap: 1.25rem;
+    .deck-container.has-open {
+        margin-top: 1.5rem !important;
     }
-    .domain-title {
-        font-size: 0.95rem;
+    .folder {
+        max-width: 100%;
+        height: 380px;
+        margin-inline: auto;
     }
-    .domain-tags {
-        gap: 0.45rem;
+    .folder:not(:first-child) {
+        --mt: -60px;
     }
-    .tech-pill {
-        font-size: 0.72rem;
-        padding: 0.35rem 0.8rem;
+    .folder.is-open {
+        --mt: var(--rise);
     }
-    .stack-card {
-        padding: 1.25rem 1.1rem;
-        min-height: auto;
+    .folder-paper {
+        height: 370px;
+        padding: 22px 18px 150px;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
     }
-    .stack-card-tag {
-        font-size: 0.58rem;
+    .folder-front {
+        padding: 24px 20px;
     }
-    .stack-card-list li {
-        font-size: 0.78rem;
+    .folder-num {
+        font-size: 58px;
     }
 
     /* GitHub Activity Card Mobile */
