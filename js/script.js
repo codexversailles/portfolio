@@ -397,13 +397,22 @@ document.addEventListener('DOMContentLoaded', () => {
             }).join('');
         }
 
+        let closeTimer = null;
+
         function closeFolder() {
             if (!openFolderEl) return;
-            openFolderEl.classList.remove('is-open');
-            const frontBtn = openFolderEl.querySelector('.folder-front');
+            const closingEl = openFolderEl;
+            closingEl.classList.remove('is-open');
+            closingEl.classList.add('is-closing');
+            const frontBtn = closingEl.querySelector('.folder-front');
             if (frontBtn) frontBtn.setAttribute('aria-expanded', 'false');
             openFolderEl = null;
             deckContainer.classList.remove('has-open');
+
+            clearTimeout(closeTimer);
+            closeTimer = setTimeout(() => {
+                closingEl.classList.remove('is-closing');
+            }, 750);
         }
 
         function openFolder(folderEl) {
@@ -412,8 +421,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 closeFolder();
                 return;
             }
-            closeFolder();
+            if (openFolderEl) {
+                closeFolder();
+            }
 
+            clearTimeout(closeTimer);
+            folderEl.classList.remove('is-closing');
             folderEl.classList.add('is-open');
             const frontBtn = folderEl.querySelector('.folder-front');
             if (frontBtn) frontBtn.setAttribute('aria-expanded', 'true');

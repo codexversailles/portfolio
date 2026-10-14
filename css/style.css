@@ -1243,7 +1243,8 @@ img { display: block; width: 100%; height: auto; object-fit: cover; }
         transform var(--dur-hover) var(--ease-folder),
         opacity 0.5s ease,
         filter 0.5s ease,
-        margin-top 0.7s var(--ease-folder);
+        margin-top 0.7s var(--ease-folder),
+        z-index 0s linear 0.7s;
 
     --enter: 0px;
 }
@@ -1264,12 +1265,19 @@ img { display: block; width: 100%; height: auto; object-fit: cover; }
     --shift: 40px;
 }
 
-/* Open State */
-.folder.is-open {
+/* Open & Closing State: Keep high z-index until paper fully retracts */
+.folder.is-open,
+.folder.is-closing {
     --fan-on: 0;
     --lift: 0px;
     --shift: 0px;
-    z-index: 35;
+    z-index: 45 !important;
+    transition:
+        transform var(--dur-hover) var(--ease-folder),
+        opacity 0.5s ease,
+        filter 0.5s ease,
+        margin-top 0.7s var(--ease-folder),
+        z-index 0s;
 }
 
 .deck-container.has-open .folder:not(.is-open) {
