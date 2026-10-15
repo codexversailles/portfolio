@@ -284,24 +284,28 @@
         display: flex;
         flex-direction: column;
         height: 100%;
-        background: var(--deep);
-        border: 1px solid var(--border);
+        background: rgba(18, 19, 24, 0.75);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 10px;
+        overflow: hidden;
     }
     .press-thumb {
         aspect-ratio: 16 / 10;
         width: 100%;
-        background: var(--surface);
+        background: #08080a;
+        padding: 0;
     }
     .press-body {
-        padding: 0.85rem 0.75rem 0.75rem;
-        gap: 0.5rem;
+        padding: 0.8rem 0.75rem 0.75rem;
+        gap: 0.45rem;
         flex: 1;
         display: flex;
         flex-direction: column;
     }
     .press-card-meta {
-        font-size: 0.52rem;
-        letter-spacing: 0.12em;
+        font-size: 0.54rem;
+        letter-spacing: 0.1em;
+        gap: 0.35rem;
     }
     .press-headline {
         font-size: 0.78rem;
@@ -317,23 +321,24 @@
     }
     .press-card-action {
         margin-top: auto;
-        padding-top: 0.4rem;
+        padding-top: 0.35rem;
     }
     .press-action-link,
     .press-btn {
-        padding: 0.55rem 0.6rem;
-        font-size: 0.52rem;
-        letter-spacing: 0.12em;
-        width: 100%;
-        text-align: center;
-        justify-content: center;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 0.58rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--gold);
+        background: transparent;
+        border: none;
+        padding: 0;
+        width: auto;
     }
     .press-action-link .press-arrow {
-        font-size: 0.7rem;
-    }
-    .press-folio-tag {
-        font-size: 0.48rem;
-        letter-spacing: 0.15em;
+        font-size: 0.75rem;
     }
 
     /* ---- Stack & Skills Mobile (2x2 Grid) ---- */
@@ -389,32 +394,37 @@
     /* Mobile Front Flap */
     .folder-front {
         top: 38px;
-        padding: 16px 12px;
+        padding: 16px 14px;
         border-radius: 10px;
+        align-items: flex-start;
+        text-align: left;
     }
     .folder-num {
         font-size: 38px;
         line-height: 1;
         margin-bottom: auto;
+        text-align: left;
+        align-self: flex-start;
         -webkit-text-stroke: 1px rgba(201, 169, 110, 0.55);
     }
     .folder-title {
-        font-size: 11px;
-        line-height: 1.3;
-        letter-spacing: 0.02em;
-        margin-bottom: 6px;
+        font-size: 13.5px;
+        line-height: 1.25;
+        letter-spacing: -0.01em;
+        text-transform: none;
+        text-align: left;
+        width: 100%;
+        align-self: flex-start;
+        margin: 0 0 4px 0;
     }
     .folder-sub {
-        font-size: 8.5px;
-        line-height: 1.45;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
+        display: none !important;
     }
     .folder-cue {
         font-size: 8px;
-        margin-top: 8px;
+        margin-top: 4px;
+        margin-left: 0;
+        align-self: flex-start;
         gap: 5px;
     }
     .folder-cue-icon {
@@ -803,9 +813,13 @@
     }
     .folder-num {
         font-size: 34px;
+        text-align: left;
+        align-self: flex-start;
     }
     .folder-title {
-        font-size: 10px;
+        font-size: 12px;
+        text-transform: none;
+        text-align: left;
     }
     .folder-paper {
         height: 255px;

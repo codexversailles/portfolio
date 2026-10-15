@@ -386,7 +386,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         <button class="folder-front" id="front-btn-${i}" aria-expanded="false" aria-controls="paper-${i}" tabindex="0">
                             <span class="folder-num">${f.n}</span>
                             <h3 class="folder-title">${f.title}</h3>
-                            <p class="folder-sub">${f.sub}</p>
                             <span class="folder-cue">
                                 <span>EXPLORE</span>
                                 <span class="folder-cue-icon">&darr;</span>
