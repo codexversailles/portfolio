@@ -2020,6 +2020,9 @@ img { display: block; width: 100%; height: auto; object-fit: cover; }
     border-radius: 6px;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     text-decoration: none;
+    cursor: pointer;
+    font-family: inherit;
+    line-height: inherit;
 }
 
 .project-action-btn:hover {

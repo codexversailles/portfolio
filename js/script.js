@@ -780,16 +780,59 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 10. Resume Availability Check & Luxury Popup
+    // 10. Luxury Alert Popup (Resume & Restricted Repository Access)
     const resumeBtns = document.querySelectorAll('.resume-btn');
+    const repoRequestBtns = document.querySelectorAll('.repo-request-btn');
     const toastModal = document.getElementById('toast-modal');
     const toastClose = document.getElementById('toast-close');
+    const toastIcon = document.getElementById('toast-icon');
+    const toastTitle = document.getElementById('toast-title');
+    const toastDesc = document.getElementById('toast-desc');
+    const toastBtn = document.getElementById('toast-btn');
+
+    function openToastModal({ icon = 'NOTICE', title, desc, btnText = 'CONTACT VIA EMAIL \u2197', btnHref = 'mailto:fermolance@gmail.com' }) {
+        if (!toastModal) return;
+        if (toastIcon) toastIcon.textContent = icon;
+        if (toastTitle) toastTitle.textContent = title;
+        if (toastDesc) toastDesc.textContent = desc;
+        if (toastBtn) {
+            toastBtn.innerHTML = `<span>${btnText}</span>`;
+            toastBtn.setAttribute('href', btnHref);
+        }
+        toastModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
 
     function showResumeUnavailable() {
-        if (toastModal) {
-            toastModal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
+        openToastModal({
+            icon: 'NOTICE',
+            title: 'The resume is not available right now.',
+            desc: 'The updated document is currently being finalized. Feel free to reach out directly via email for credentials and project inquiries.',
+            btnText: 'CONTACT VIA EMAIL \u2197',
+            btnHref: 'mailto:fermolance@gmail.com'
+        });
+    }
+
+    function showRestrictedRepoModal(projectName) {
+        const title = projectName || 'USTP Clinic Management System';
+        const subject = encodeURIComponent(`Codebase Access Request: ${title}`);
+        const body = encodeURIComponent(`Hi Lance,\n\nI would like to request read access to the ${title} repository for technical evaluation.\n\nThank you!`);
+        openToastModal({
+            icon: 'RESTRICTED REPOSITORY',
+            title: 'Institutional Codebase',
+            desc: `${title} is maintained as a private repository because it contains campus clinic records architecture, student & staff patient data schemas, and internal institutional workflows. Source code walkthroughs and repository access are available upon request for technical review.`,
+            btnText: 'REQUEST REPO ACCESS VIA EMAIL \u2197',
+            btnHref: `mailto:fermolance@gmail.com?subject=${subject}&body=${body}`
+        });
+    }
+
+    if (repoRequestBtns.length) {
+        repoRequestBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showRestrictedRepoModal(btn.dataset.project);
+            });
+        });
     }
 
     function closeToast() {
