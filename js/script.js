@@ -374,8 +374,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="folder-back" aria-hidden="true"></div>
                         <div class="folder-paper" id="paper-${i}" role="region" aria-labelledby="front-btn-${i}">
                             <div class="paper-header">
-                                <span class="paper-title">TECH INDEX &middot; ${itemCount} ITEMS</span>
-                                <span class="paper-indicator" aria-hidden="true"></span>
+                                <span class="paper-title">${itemCount} TECHNOLOGIES</span>
                             </div>
                             <ul class="tags-list">
                                 ${f.tags.map((tag, tIndex) => `
@@ -386,10 +385,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         <button class="folder-front" id="front-btn-${i}" aria-expanded="false" aria-controls="paper-${i}" tabindex="0">
                             <span class="folder-num">${f.n}</span>
                             <h3 class="folder-title">${f.title}</h3>
-                            <span class="folder-cue">
-                                <span>EXPLORE</span>
-                                <span class="folder-cue-icon">&darr;</span>
-                            </span>
                         </button>
                     </article>
                 `;
