@@ -352,19 +352,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 n: "01",
                 title: "Systems & Core Architecture",
                 sub: "Core Programming · Game Engines · Mobile Frameworks",
-                tags: ["Python", "C / C#", "Java", "Dart", "Flutter", "Kotlin", "PHP", "SQL", "Godot Engine"]
+                tags: ["Python", "TypeScript", "C / C#", "Java", "Dart", "Flutter", "Kotlin", "PHP", "SQL", "Web Workers", "Godot Engine"]
             },
             {
                 n: "02",
                 title: "Interface & Platforms",
                 sub: "Modern Web Systems · Full-Stack Frameworks · Cloud Backends",
-                tags: ["React", "Next.js", "JavaScript / ES6+", "HTML5 & Modern CSS", "Tailwind CSS", "CodeIgniter 4", "Laravel", "Node.js", "RESTful APIs", "MySQL", "PostgreSQL", "Firebase", "Vercel · CI/CD"]
+                tags: ["React 19", "Next.js", "TypeScript", "JavaScript / ES6+", "Vite", "Tailwind CSS v4", "HTML5 & Modern CSS", "Zod", "Vitest", "CodeIgniter 4", "Laravel", "Node.js", "RESTful APIs", "MySQL", "PostgreSQL", "Firebase", "Vercel · CI/CD"]
             },
             {
                 n: "03",
                 title: "Applied AI & Machine Intelligence",
                 sub: "Local LLM Inference · Vector Databases · Edge Computer Vision",
-                tags: ["Qwen2 (Local LLMs)", "Google Gemini 1.5 Flash", "RAG Architecture", "ObjectBox (Vector DB)", "Vector Embeddings", "Ultralytics YOLOv8", "OpenCV Vision", "Claude & OpenAI APIs"]
+                tags: ["Qwen2 (Local LLMs)", "Google Gemini 1.5 Flash", "RAG Architecture", "ObjectBox (Vector DB)", "Vector Embeddings", "Monte Carlo Simulation (Box–Muller)", "Ultralytics YOLOv8", "OpenCV Vision", "Claude & OpenAI APIs"]
             },
             {
                 n: "04",
@@ -942,12 +942,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 let level = 0;
 
                 // Match recent activity spikes
-                if (dateStr >= '2026-10-01' && dateStr <= '2026-10-10') {
+                if (dateStr >= '2026-10-01' && dateStr <= '2026-11-05') {
                     if (dateStr === '2026-10-03') { count = 41; level = 4; }
                     else if (dateStr === '2026-10-04') { count = 26; level = 4; }
                     else if (dateStr === '2026-10-09') { count = 9; level = 4; }
-                    else if (dateStr === '2026-10-01' || dateStr === '2026-10-08') { count = 2; level = 1; }
-                    else if (dateStr === '2026-10-10') { count = 1; level = 1; }
+                    else if (dateStr === '2026-10-11') { count = 11; level = 4; }
+                    else if (dateStr === '2026-10-12') { count = 4; level = 2; }
+                    else if (dateStr === '2026-10-19') { count = 3; level = 2; }
+                    else if (dateStr === '2026-11-02') { count = 6; level = 3; }
+                    else if (dateStr === '2026-11-03') { count = 4; level = 2; }
+                    else if (dateStr === '2026-10-01' || dateStr === '2026-10-08' || dateStr === '2026-10-10') { count = 2; level = 1; }
+                    else if (dateStr === '2026-10-14' || dateStr === '2026-10-15' || dateStr === '2026-10-20') { count = 1; level = 1; }
                 }
 
                 cells.push({ date: dateStr, count, level });
