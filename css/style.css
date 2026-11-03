@@ -630,7 +630,7 @@ img { display: block; width: 100%; height: auto; object-fit: cover; }
     line-height: 0.85;
     letter-spacing: -0.04em;
     color: var(--white);
-    text-transform: uppercase;
+    text-transform: none;
     font-kerning: normal;
     font-feature-settings: "kern" 1;
     text-rendering: optimizeLegibility;
@@ -3259,7 +3259,7 @@ img { display: block; width: 100%; height: auto; object-fit: cover; }
     line-height: 0.85;
     letter-spacing: -0.04em;
     color: var(--white);
-    text-transform: uppercase;
+    text-transform: none;
     text-align: center;
     font-kerning: normal;
     font-feature-settings: "kern" 1;
